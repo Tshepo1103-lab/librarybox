@@ -1,0 +1,10 @@
+.footerContainer{
+    height:50px;
+    align-items: center;
+    background-color: #bd7e1f;
+
+}
+.footerContainer h5{
+    margin-left:20px;
+    margin-top: 10px;;
+}
