@@ -23,6 +23,6 @@ export const useStyles = createStyles({
         text-align: center;
         height: 88vh;
         color: #000;
-        background-color: #fdf9f6;
+        background-color: #f8ebe0;
         `
 })

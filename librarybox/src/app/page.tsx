@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import { Button } from "antd";
 
 export default function Home() {
   return (
@@ -17,6 +18,9 @@ export default function Home() {
           <div className={styles.content}>
             <h1>Welcome Siyakwamukela!</h1>
             <h3>A Library for the community established in 1950</h3>
+          </div>
+          <div className={styles.buttonContainer}>
+          <Button className={styles.button}type="primary">Get started</Button>
           </div>
         </div>
 

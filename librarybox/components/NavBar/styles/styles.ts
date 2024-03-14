@@ -14,10 +14,10 @@ export const useStyles=createStyles({
         color:#fff;
         `,
     list: css `
-    backgroundcolor:grey;
     `,
     items: css `
         padding-right:40px;
+        font-size:20px;
     `,
       li: css `
       margin: 10px 20px;
@@ -26,7 +26,15 @@ export const useStyles=createStyles({
       font-size: 20px;
       display: inline-block;
       padding: 20px;
-      `
+      `,
+    //   active:css`
+    //   background-color:#f8ebe0;
+    //   color:#000;
+    //   padding-right:40px;
+    //   font-size:20px;
+    //   padding-bottom:50px;
+    //   padding-top:20px;
+    //   `
       
        
       

@@ -14,17 +14,15 @@ export const useStyles=createStyles({
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 30px;
         padding: 30px;
-        width:80%;
+      
       `,
     card:css`
     background: #fff;
     border-radius: 20px;
-    // display: flex;
     cursor: pointer;
     box-shadow: 5px 15px 5px 2px rgba(0, 0, 0, 0.09);
     transition: background 0.3s ease-in-out;
     overflow: hidden;
-    width:550px;
     height:100px;
 `    
 })
