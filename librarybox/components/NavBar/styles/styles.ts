@@ -27,6 +27,16 @@ export const useStyles=createStyles({
       display: inline-block;
       padding: 20px;
       `,
+      drawerItems:css`
+      
+      padding-left:100px;
+      `,
+      logout:css`
+      position: absolute;
+      bottom:0;
+      padding-bottom:20px;
+      padding-left:150px;
+      `
     //   active:css`
     //   background-color:#f8ebe0;
     //   color:#000;

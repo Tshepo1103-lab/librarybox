@@ -9,7 +9,7 @@ export default function Home() {
         {/* Column 1: Image */}
         <div className={styles.column}>
           <div className={styles.image}>
-          <Image src="/img/books.png" alt="Stack of books" width={500} height={400} />
+          <Image src="/assets/img/book.png" alt="Stack of books" width={500} height={400} />
           </div>
         </div>
 
@@ -20,7 +20,7 @@ export default function Home() {
             <h3>A Library for the community established in 1950</h3>
           </div>
           <div className={styles.buttonContainer}>
-          <Button className={styles.button}type="primary">Get started</Button>
+          <Button href="/catalog" className={styles.button}type="primary">Discover New Reads</Button>
           </div>
         </div>
 

@@ -1,17 +1,8 @@
 import { createStyles,css } from "antd-style";
 
 export const useStyles=createStyles({
-        container:css`
-      
-         position: relative; /* Change to relative position */
-         bottom: 0;
-        `,
-        searchContainer:css`
-      
-        margin:50px;
-        padding:50px;
-        `,
-        searchBox:css`
-        width:50%;
-        `
+         container:css`
+         max-height: 70vh; /* Set maximum height */
+         overflow-y: auto; /* Enable vertical scrolling */
+         `      
 })
