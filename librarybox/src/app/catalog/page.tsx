@@ -6,12 +6,12 @@ import Search from '../../../components/Search/search';
 
 const Catalog = () => {
   const{styles}=useStyles();
- 
-  return (
+
+   return(
     <div>
-     <Search/>
+      <Search/>
     </div>
-  )
+   ) 
 }
 
 export default Catalog

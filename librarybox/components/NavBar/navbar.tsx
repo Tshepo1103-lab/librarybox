@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React,{useState} from 'react';
 import {useStyles} from './styles/styles'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-
+import { UserOutlined,LogoutOutlined } from '@ant-design/icons';
+import { Drawer,Button } from 'antd';
 
 const navLinks=[
   {name:"Home",href:"/"},
@@ -14,6 +15,16 @@ const navLinks=[
 ];
 
 const NavBar = () => {
+  const [open, setOpen] = useState(false);
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
+
   const pathname=usePathname();
   const {styles}=useStyles();
   return (
@@ -32,7 +43,21 @@ const NavBar = () => {
         })}
         </div>
         <div>
-            <Link href="/login" className={styles.items}>Login</Link>
+            <Button onClick={showDrawer} className={styles.items}>
+                <UserOutlined />
+               
+              </Button>
+              <Drawer title="Profile" onClose={onClose} open={open}>
+                <div className={styles.drawerItems}>
+                <p>Tshepo</p>
+                <p>Mahlangu</p>
+                <p>tshepo1103@gmail.com</p>
+                <Link href="/">Account Settings</Link>
+                </div>
+                <div>
+                  <h4 className={styles.logout}><LogoutOutlined />  Logout</h4>
+                </div>            
+              </Drawer>
         </div>
     </nav> 
     

@@ -52,19 +52,27 @@ const Search: React.FC = () => {
         </div>
       )}
       {searchTerm !== '' && (
-        <div className={styles.data}>
-          {filteredData.map(item => (
-            <Card key={item.id} className={styles.searchCard} cover={<Image src="/assets/img/book.png" alt="Stack of books" width={240} height={160} />}>
-              <div>
-                <h3>{item.title}</h3>
-                <p>Authors: {item.authors.join(', ')}</p>
-                <p>ISBN: {item.isbn}</p>
-                <p>Category: {item.category}</p>
-                <p>Shelf: {item.shelf}</p>
-              </div>
-            </Card>
-          ))}
-        </div>
+        <>
+          {filteredData.length > 0 ? (
+            <div className={styles.data}>
+              {filteredData.map(item => (
+                <Card key={item.id} className={styles.searchCard} cover={<Image src="/assets/img/book.png" alt="Stack of books" width={240} height={160} />}>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>Authors: {item.authors.join(', ')}</p>
+                    <p>ISBN: {item.isbn}</p>
+                    <p>Category: {item.category}</p>
+                    <p>Shelf: {item.shelf}</p>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className={styles.container}>
+              <h2>No results found</h2>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
