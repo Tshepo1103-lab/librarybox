@@ -1,0 +1,110 @@
+[
+    {
+        "id": 1,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "Love",
+        "isbn": "978-1-12345-678-9",
+        "authors": ["Author A", "Author B"],
+        "category": "Romance",
+        "shelf": "A"
+    },
+    {
+        "id": 2,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "Physics",
+        "isbn": "978-1-23456-789-0",
+        "authors": ["Author C"],
+        "category": "Science",
+        "shelf": "B"
+    },
+    {
+        "id": 3,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "How to make money",
+        "isbn": "978-1-34567-890-1",
+        "authors": ["Author D"],
+        "category": "Finance",
+        "shelf": "C"
+    },
+    {
+        "id": 4,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "Learning Programming with Tshepo",
+        "isbn": "978-1-45678-901-2",
+        "authors": ["Author E", "Author F"],
+        "category": "Programming",
+        "shelf": "D"
+    },
+    {
+        "id": 5,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "Love",
+        "isbn": "978-1-56789-012-3",
+        "authors": ["Author A", "Author B"],
+        "category": "Romance",
+        "shelf": "A"
+    },
+    {
+        "id": 6,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "Physics",
+        "isbn": "978-1-67890-123-4",
+        "authors": ["Author C"],
+        "category": "Science",
+        "shelf": "B"
+    },
+    {
+        "id": 7,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "How to make money",
+        "isbn": "978-1-78901-234-5",
+        "authors": ["Author D"],
+        "category": "Finance",
+        "shelf": "C"
+    },
+    {
+        "id": 8,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "Learning Programming with Tshepo",
+        "isbn": "978-1-89012-345-6",
+        "authors": ["Author E", "Author F"],
+        "category": "Programming",
+        "shelf": "D"
+    },
+    {
+        "id": 9,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "Love",
+        "isbn": "978-1-90123-456-7",
+        "authors": ["Author A", "Author B"],
+        "category": "Romance",
+        "shelf": "A"
+    },
+    {
+        "id": 10,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "Physics",
+        "isbn": "978-1-01234-567-8",
+        "authors": ["Author C"],
+        "category": "Science",
+        "shelf": "B"
+    },
+    {
+        "id": 11,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "How to make money",
+        "isbn": "978-1-12345-678-9",
+        "authors": ["Author D"],
+        "category": "Finance",
+        "shelf": "C"
+    },
+    {
+        "id": 12,
+        "image": "https://www.wallpaperflare.com/five-pile-of-books-in-white-background-education-school-literature-wallpaper-zerth",
+        "title": "Learning Programming with Tshepo",
+        "isbn": "978-1-23456-789-0",
+        "authors": ["Author E", "Author F"],
+        "category": "Programming",
+        "shelf": "D"
+    }
+]

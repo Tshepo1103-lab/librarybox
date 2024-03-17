@@ -18,11 +18,13 @@ export const useStyles = createStyles({
         text-align: center;
         color: #fff;
         background-color: #6b8e91;
+        z-index:999;
         `,
     contentStyle: css`
         text-align: center;
         height: 88vh;
         color: #000;
         background-color: #f8ebe0;
+        overflow-y:auto;
         `
 })
