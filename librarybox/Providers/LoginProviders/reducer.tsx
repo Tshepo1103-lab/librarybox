@@ -1,12 +1,16 @@
-import {handleActions } from "redux-actions"; 
-import { LoginActionEnums } from './actions';
+import { UserActionEnum } from "./actions";
+import { IUserStateContext } from "./context";
 
+export function UserReducer(incomingState: IUserStateContext, action: ReduxActions.Action<IUserStateContext>): IUserStateContext {
 
-export const loginReducer=handleActions(
-    {
-        [LoginActionEnums.LOGIN]:(state,action)=>({
-            ...state,
-            ...action.payload
-        })  
-    },{}
-)
+    const { type, payload } = action;
+
+    switch (type) { 
+        case UserActionEnum.createUserRequest:
+            return { ...incomingState, ...payload };
+        case UserActionEnum.getUserDetailsRequest:
+            return { ...incomingState, ...payload };
+        default:
+            return incomingState;
+    }
+}

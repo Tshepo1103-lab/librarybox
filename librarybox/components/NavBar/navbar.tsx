@@ -43,7 +43,7 @@ const NavBar = () => {
         })}
         </div>
         <div>
-            <Button onClick={showDrawer} className={styles.items}>
+            <Button onClick={showDrawer} className={styles.button}>
                 <UserOutlined />
                
               </Button>
@@ -52,6 +52,7 @@ const NavBar = () => {
                 <p>Tshepo</p>
                 <p>Mahlangu</p>
                 <p>tshepo1103@gmail.com</p>
+                <p>History</p>
                 <Link href="/">Account Settings</Link>
                 </div>
                 <div>

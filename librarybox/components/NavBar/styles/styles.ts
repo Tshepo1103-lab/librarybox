@@ -36,6 +36,9 @@ export const useStyles=createStyles({
       bottom:0;
       padding-bottom:20px;
       padding-left:150px;
+      `,
+      button:css`
+      background-color:#6b8e91;
       `
     //   active:css`
     //   background-color:#f8ebe0;

@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import { useUser } from '../../../../Providers/LoginProviders';
 import { useStyles } from './styles/styles';
 import {
   AutoComplete,
@@ -13,6 +14,7 @@ import {
   Row,
   Select,
 } from 'antd';
+import { IUser } from '../../../../Providers/LoginProviders/context';
 
 const { Option } = Select;
 
@@ -51,9 +53,15 @@ const tailFormItemLayout = {
 function Register() {
     const {styles}=useStyles();
     const [form] = Form.useForm();
+    const { createUser } = useUser();
 
-  const onFinish = (values: any) => {
+  const onFinish = (values:any) => {
     console.log('Received values of form: ', values);
+    const roleNames = ['user'];
+    if(createUser)
+    {
+      createUser({...values});
+    } 
   };
 
   const prefixSelector = (
@@ -104,14 +112,14 @@ function Register() {
         <p>Create an account</p>
       </div>
      <Form.Item
-        name="username"
+        name="userName"
         label="Username"
         tooltip="What do you want others to call you?"
         rules={[{ required: true, message: 'Please input your username!', whitespace: true }]}>
         <Input />
       </Form.Item>
       <Form.Item
-        name="email"
+        name="emailAddress"
         label="E-mail"
         rules={[
           {
@@ -126,7 +134,39 @@ function Register() {
       >
         <Input />
       </Form.Item>
-
+      <Form.Item
+        name="name"
+        label="name"
+        rules={[
+          {
+            type: 'string',
+            message: 'The input is not valid E-mail!',
+          },
+          {
+            required: true,
+            message: 'Please input your E-mail!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
+      
+      <Form.Item
+        name="surname"
+        label="surname"
+        rules={[
+          {
+            type: 'string',
+            message: 'The input is not valid E-mail!',
+          },
+          {
+            required: true,
+            message: 'Please input your E-mail!',
+          },
+        ]}
+      >
+        <Input />
+      </Form.Item>
       <Form.Item
         name="password"
         label="Password"
@@ -141,7 +181,7 @@ function Register() {
         <Input.Password />
       </Form.Item>
 
-      <Form.Item
+      {/* <Form.Item
         name="confirm"
         label="Confirm Password"
         dependencies={['password']}
@@ -162,12 +202,22 @@ function Register() {
         ]}
       >
         <Input.Password />
-      </Form.Item>
-      <Form.Item
-        name="phone"
-        label="Phone Number"
-        rules={[{ required: true, message: 'Please input your phone number!' }]} >
-        <Input addonBefore={prefixSelector} style={{ width: '100%' }} />
+      </Form.Item> */}
+           <Form.Item
+        name="phoneNumber"
+        label="phone"
+        rules={[
+          {
+            type: 'string',
+            message: 'The input is not valid E-mail!',
+          },
+          {
+            required: true,
+            message: 'Please input your E-mail!',
+          },
+        ]}
+      >
+        <Input />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">

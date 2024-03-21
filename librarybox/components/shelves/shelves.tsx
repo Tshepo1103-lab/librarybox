@@ -1,33 +1,36 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, Space } from 'antd';
 import { useStyles } from './styles/style';
+import { useBookAction, useBookState } from '../../Providers/BookProviders';
+import { useRouter } from 'next/navigation';
 
-const Shelves = () => {
-const {styles}=useStyles();
+
+const Shelves = () => { 
+  const router=useRouter();
+
+  const action:any=useBookAction();
+  const status:any=useBookState();
+  const { styles } = useStyles();
+
+ 
+  console.log( console.log(status+"checking"))
+  useEffect(()=>{
+    action.fetchData();
+   
+  },[])
+  
   return (
     <div className={styles.container}>
-    <Space className={styles.cardBox}>
-    <Card className={styles.card} >
-      <h1>Shelf A</h1>
-     
-    </Card>
-    <Card className={styles.card}>
-      <h1>Shelf B</h1>
-      
-    </Card>
-    <Card className={styles.card} >
-      <h1>Shelf C</h1>
-      
-    </Card>
-    <Card className={styles.card}>
-      <h1>Shelf D</h1>
-      
-    </Card>
-   
-  </Space>
-  </div>
-  )
-}
+      <Space className={styles.cardBox}>
+        {Object.keys(status).map((item:any, index:any) => (
+          <Card className={styles.card} key={index} onClick={()=>router.push(`/catalog/${status[item].id}`)}>
+            <h1>{status[item].name}</h1>
+          </Card>
+        ))}
+      </Space>
+    </div>
+  );
+};
 
 export default Shelves;
