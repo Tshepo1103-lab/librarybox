@@ -11,20 +11,21 @@ export const useStyles = createStyles({
      
     headerStyle: css`
         text-align: right;
-        background-color: #6b8e91;
+        background-color: #873e23;
     `,
     
     footerStyle: css`
         text-align: center;
         color: #fff;
-        background-color: #6b8e91;
-        z-index:999;
+        background-color: #873e23;
         `,
     contentStyle: css`
-        text-align: center;
-        height: 88vh;
-        color: #000;
-        background-color: #f8ebe0;
-        overflow-y:auto;
+    text-align: center;
+    height: 88vh;
+    color: #000;
+    background-image: url('/assets/img/Home.JPEG'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
         `
 })

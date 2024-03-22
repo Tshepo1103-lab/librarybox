@@ -1,60 +1,65 @@
 .main {
-  padding: 2.5rem;
-  min-height: 88vh;
-  /* background-color:#f0dab2; */
-}
-.container{
-  display:flex;
-  justify-content: space-between;
-}
-.column {
-  flex: 1; 
-  margin-right: 20px; 
-}
-.content{
-  
-  text-align: center;
-}
-.image{
-  transform:translate(0%,65%);
-}
-.tradingHours{
-  position: relative;
-  float:right;
-  transform: translate(0%, -10%); 
-  width: 400px;
-  padding: 50px 50px;
-  box-sizing: border-box;
-  background-color: rgba(0,0,0,0.2); 
-  font-size: 24px;  
-  border-radius: 10%; 
-  margin-top:200px; 
-  align-items: center;
+  height: 88vh;
+  color: #000;
+  background-image: url("/assets/img/Home.JPEG");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column; /* Change to column */
 }
 
-.tradingHours h4{
-  margin-bottom: 15px;
-} 
+.column {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+
+.content {
+  width: 450px;
+  text-align: center;
+  color: rgba(199, 165, 165, 0.863);
+}
+
+.tradingHours {
+  color: rgba(199, 165, 165, 0.863);
+  text-align: center;
+  transform: translate(0%, -10%);
+  width: 460px;
+  padding: 30px 30px;
+  box-sizing: border-box;
+  background-color: rgba(0, 0, 0, 0.2);
+  font-size: 24px;
+  border-radius: 10%;
+  margin-top: 80px;
+}
+
+.tradingHours h4 {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
 .tradingHours ul {
+  text-align: center;
   list-style-type: none;
   padding: 0;
   margin: 0;
 }
-.buttonContainer{
-  margin-top: 300px;
+
+.buttonContainer {
+  text-align: left;
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 80px;
 }
-.button{
-  width:300px;
-  height:50px;
+
+.button {
+  width: 200px;
+  height: 50px;
   border-radius: 15px;
-  background-color: #6b8e91;
+  background-color: #873e23;
   font-size: 20px;
 }
-
-
-
-
-
-
-
-
+.button:hover {
+  background-color: #eab676;
+}

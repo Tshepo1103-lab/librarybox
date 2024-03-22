@@ -5,6 +5,7 @@ import { useStyles } from './styles/styles';
 import data from './template.json';
 import Image from 'next/image';
 import Shelves from '../shelves/shelves';
+import { SearchOutlined } from '@ant-design/icons';
 
 const { Meta } = Card;
 
@@ -35,16 +36,18 @@ const Search: React.FC = () => {
   return (
     <div className={styles.searchContainer}>
       <Search
-        placeholder="Search here..."
+        placeholder="Search Shelves"
         allowClear
-        enterButton="Search"
+        prefix={<SearchOutlined />}
+
         onSearch={onSearch}
         onChange={handleSearchChange}
         className={styles.searchBox}
       />
       {!search && searchTerm === '' && !filteredData.length && ( // Show shelves if search is not active, there's no search term, and there are no search results
         <div className={styles.container}>
-          <h2>Explore the shelves</h2>
+          <br/>
+          <h2>Browse through the shelves</h2>
           <br />
           <div>
             <Shelves />

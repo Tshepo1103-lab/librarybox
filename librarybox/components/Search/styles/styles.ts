@@ -1,22 +1,22 @@
 import { createStyles,css } from "antd-style";
 
 export const useStyles=createStyles({
-    container:css` 
-    position: relative; /* Change to relative position */
-    bottom: 0;
-    margin-top:70px;
-   `,  
-    searchContainer:css`
-    margin:50px;
-    padding:50px;
+  
+   container: css`
+   color: white;
+   font-family: 'Roboto', sans-serif;
+   font-size: 20px; 
+    font-weight: bold; 
     `,
-    searchBox:css`
+    searchContainer: css`
+    padding: 20px 50px; 
+    margin-bottom: 3%; 
+    `,
+    searchBox: css`
     width: 50%;
-    position: fixed; 
-    left: 50%; 
-    transform: translateX(-50%);
-    z-index:999;
-    `,
+    margin-top: 2%; 
+    `
+    ,
     searchCard:css`
     background: #fff;
     border-radius: 10px;

@@ -1,11 +1,11 @@
 import {createContext} from 'react';
 
 
-// export interface ILogin{
-//     userNameOrEmailAddress: string,
-//     password: string,
-//     id: string 
-//   } 
+export interface ILogin{
+    userNameOrEmailAddress: string,
+    password: string,
+    id: string 
+  } 
   export interface IUser {
     id: string;
     userName: string;
@@ -22,12 +22,21 @@ export const INITIAL_STATE: IUserStateContext={}
 export interface IUserStateContext {
     readonly CreateUser? : IUser; 
     readonly user?: IUser;
+    readonly UserLogin? : ILogin;
+    readonly userId?: number;
+    readonly currentUser?: IUser;
+    readonly UserLogOut?:IUser;
+
 }
 
 
 export interface IUserActionContext{
-    createUser?:(payload:IUser) => void;
-    getUserDetails?:(id:number) => void
+  loginUser?:(payload:ILogin) => void;
+  createUser?:(payload:IUser) => void;
+  logOutUser?:() => void;
+  setCurrentUser?:(user:IUser) => void;
+  getUserDetails?:(id:number) => void
+  setUserId?: (userId: number) => void;
 }
 
 const UserContext = createContext<IUserStateContext>(INITIAL_STATE);
