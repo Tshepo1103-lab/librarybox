@@ -3,6 +3,7 @@ import { Card, Space } from 'antd';
 import { useStyles } from './styles/style';
 import { useRouter } from 'next/navigation';
 import { useBookAction, useBookState } from '../../Providers/BookProviders';
+import { IShelf } from '../../Providers/BookProviders/context';
 
 const Shelves: React.FC = () => {
   const { styles } = useStyles();
@@ -11,8 +12,8 @@ const Shelves: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const router=useRouter();
 
-  const action:any=useBookAction();
-  const status:any=useBookState();
+  const {fetchShelf}=useBookAction();
+  const status=useBookState();
 
 
   useEffect(() => {
@@ -49,10 +50,9 @@ const Shelves: React.FC = () => {
       }
     };
   }, [startX, scrollLeft]);
-
+  
   useEffect(()=>{
-    action.fetchData();
-   
+    fetchShelf&&fetchShelf();
   },[])
 
 
@@ -62,9 +62,9 @@ const Shelves: React.FC = () => {
       ref={containerRef}
     >
       <Space className={styles.cardBox}>
-        {Object.keys(status).map((item:any, index:any) => (
-          <Card className={styles.card} key={index} onClick={()=>router.push(`/catalog/${status[item].id}`)}>
-            <h1>{status[item].name}</h1>
+        {status.BookShelf?.map((item, index:number) => (
+          <Card className={styles.card} key={index} >
+            <h1>{item.name}</h1>
           </Card>
         ))}
       </Space>

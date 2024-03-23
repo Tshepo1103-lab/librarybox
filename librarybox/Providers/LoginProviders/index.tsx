@@ -12,12 +12,12 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     const { push } = useRouter();
   
     const { mutate: loginUserHttp } = useMutate({
-      path: 'https://localhost:44311/api/TokenAuth/Authenticate',
+      path: `${process.env.NEXT_PUBLIC_PASS}/TokenAuth/Authenticate`,
       verb: 'POST',
     });
     
     const { mutate: createUserHttp } = useMutate({
-      path: 'https://localhost:44311/api/services/app/Person/Create',
+      path: `${process.env.NEXT_PUBLIC_PASS}/services/app/Person/Create`,
       verb: 'POST',
 
     });
@@ -71,7 +71,7 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     const getUserDetails = async (id: number) => {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch(`https://localhost:44311/api/services/app/User/Get?Id=${id}`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_PASS}/services/app/User/Get?Id=${id}`, {
           method: 'GET',
           cache: "no-cache",
           headers: {

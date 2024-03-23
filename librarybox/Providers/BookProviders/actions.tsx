@@ -1,16 +1,10 @@
 import { createAction } from "redux-actions";
+import { IBookStateContext, ICategory, IShelf } from "./context";
 
-export const BookActionEnums={
-    SHELF:"SHELF",
-    CATEGORY:"CATEGORY"
+export enum BookActionEnums{
+    Shelf="SHELF",
+    Category="CATEGORY"
 }
 
-export const ShelfAction=createAction(
-    BookActionEnums.SHELF,
-    (payload:any)=>(payload)
-
-)
-export const CategoryAction=createAction(
-    BookActionEnums.CATEGORY,
-    (payload:any)=>(payload)
-)
+export const BookRequestAction = createAction<IBookStateContext, IShelf[]>(BookActionEnums.Shelf,(BookShelf)=>({BookShelf}))
+export const CategoryAction=createAction<IBookStateContext,ICategory[]>(BookActionEnums.Category,(BookCategory)=>({BookCategory}))

@@ -1,46 +1,47 @@
-import { useContext, useReducer } from "react"
-import { bookReducer } from "./reducer"
-import { CategoryAction, ShelfAction } from "./actions"
-import { BookActionContext, BookStateContext } from "./context"
+import { useContext, useReducer, FC, PropsWithChildren} from "react"
+import { BookReducer } from "./reducer";
+import { INITIAL_STATE } from "./context";
+import axios from 'axios';
+import { BookRequestAction, CategoryAction } from "./actions";
+import { BookActionContext,BookContext } from "./context";
 
 
-const BookProvider=(props:any)=>{
-    const[state,dispatch]=useReducer(bookReducer,{})
-    const getState=()=>({...state});
-    const fetchData = async ()=>{
-        try{
-            const response=await fetch("https://localhost:44311/api/services/app/Shelf/GetAll");
-            const json=await response.json();
-            // console.log(json.result.items);
-            dispatch(ShelfAction(json.result.items))
-        }
-        catch(error){
+//Provider that will be wrapped around the children on the layout page
+const BookProvider :FC<PropsWithChildren<{}>> = ({ children }) => {
+    const [state, dispatch] = useReducer(BookReducer, INITIAL_STATE);
+
+    //Get shelves
+    const fetchShelf = async () => {
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Shelf/GetAll`);
+            dispatch(BookRequestAction(response.data.result.items));
+        } catch (error) {
             console.error(error);
         }
-    
-    }
-    const fetchCategory= async(id:string)=>{
-        try{
-            const response=await fetch(`https://localhost:44311/api/services/app/Category/GetAllIncluding?shelfId=${id}`);
-            const json=await response.json();
-            dispatch(CategoryAction(json.result))
-        }
-        catch(error){
+    };
+
+    //Get Categories
+    const fetchCategory = async (id: string) => {
+        try {
+            const response = await axios.get(`https://localhost:44311/api/services/app/Category/GetAllIncluding?shelfId=${id}`);
+            dispatch(CategoryAction(response.data.result));
+            console.log(response.data.result);
+        } catch (error) {
             console.error(error);
         }
-    }
+    };
     return(
-     <BookStateContext.Provider value={getState()}>
-        <BookActionContext.Provider value={{fetchData,fetchCategory}}>
-            {props.children}
+     <BookContext.Provider value={state}>
+        <BookActionContext.Provider value={{fetchShelf}}>
+            {children}
         </BookActionContext.Provider>
-     </BookStateContext.Provider>
+     </BookContext.Provider>
     )
 }
 export default BookProvider;
 
 export const useBookState=()=>{
-    const context=useContext(BookStateContext);
+    const context=useContext(BookContext);
     return context;
  }
  export const useBookAction=()=>{
