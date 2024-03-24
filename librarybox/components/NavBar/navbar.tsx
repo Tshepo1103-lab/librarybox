@@ -16,6 +16,8 @@ const navLinks = [
 ];
 
 const NavBar = () => {
+
+  var haveToken = localStorage.getItem("token") == null ? false : true; 
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
   const { styles } = useStyles();
@@ -38,22 +40,23 @@ const NavBar = () => {
           );
         })}
       </div>
-      <div>
-        <Button onClick={() => setOpen(true)} style={{ backgroundColor: 'transparent'}}>
-          <UserOutlined />
-        </Button>
-        <Drawer title="Profile" onClose={() => setOpen(false)} open={open}>
-          <div className={styles.drawerItems}>
-            <p>Tshepo</p>
-            <p>Mahlangu</p>
-            <p>tshepo1103@gmail.com</p>
-            <Link href="/">Account Settings</Link>
-          </div>
-          <div  className={styles.logout}>
-            <Button onClick={logOutUser}><LogoutOutlined />  Logout</Button>
-          </div>
-        </Drawer>
-      </div>
+      {haveToken?
+      <div className={styles.profile}>
+      <Button onClick={() => setOpen(true)} style={{ backgroundColor: 'transparent'}}>
+        <UserOutlined className={styles.icon}/>
+      </Button>
+      <Drawer title="Profile" onClose={() => setOpen(false)} open={open}>
+        <div className={styles.drawerItems}>
+          <p>Tshepo</p>
+          <p>Mahlangu</p>
+          <p>tshepo1103@gmail.com</p>
+          <Link href="/">Account Settings</Link>
+        </div>
+        <div  className={styles.logout}>
+          <Button onClick={logOutUser}><LogoutOutlined />  Logout</Button>
+        </div>
+      </Drawer>
+    </div>:null}
     </nav>
   )
 }

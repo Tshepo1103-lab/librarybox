@@ -1,129 +1,122 @@
-import React, { createContext, FC, PropsWithChildren, useContext, useEffect, useReducer } from 'react';
+import React, { createContext, FC, PropsWithChildren, useContext, useReducer } from 'react';
 import { message } from 'antd';
-import { useGet, useMutate } from 'restful-react';
+import { useMutate } from 'restful-react';
 import { useRouter } from 'next/navigation';
 import { UserReducer } from './reducer';
-import {ILogin ,INITIAL_STATE, IUser, IUserActionContext, IUserStateContext, UserActionContext, UserContext } from './context';
-import { createUserRequestAction,getUserDetailsRequestAction,logOutUserRequestAction,getUserIdDetailsRequestAction,loginUserRequestAction} from './actions';
-
+import { ILogin, INITIAL_STATE, IUser, IUserActionContext, IUserStateContext, UserActionContext, UserContext } from './context';
+import { createUserRequestAction, getUserDetailsRequestAction, logOutUserRequestAction, getUserIdDetailsRequestAction, loginUserRequestAction } from './actions';
+import axios from 'axios';
 
 const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
-    const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
-    const { push } = useRouter();
-  
-    const { mutate: loginUserHttp } = useMutate({
-      path: `${process.env.NEXT_PUBLIC_PASS}/TokenAuth/Authenticate`,
-      verb: 'POST',
-    });
-    
-    const { mutate: createUserHttp } = useMutate({
-      path: `${process.env.NEXT_PUBLIC_PASS}/services/app/Person/Create`,
-      verb: 'POST',
+  const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
+  const { push } = useRouter();
 
-    });
-  
-  
-  
-  
-    const loginUser = async (payload: ILogin) => {
-      try {
-        const response = await loginUserHttp(payload);
-        if (response.success) {
-          localStorage.setItem('token', response.result.accessToken);
-          dispatch(loginUserRequestAction(response.result));
-          dispatch(getUserIdDetailsRequestAction(response.result.userId));
-          if (response.result.userId === 1) {
-            push("/");
-            console.log("User ID:", response.result.userId);
-            message.success('Login successful');
-          } else {
-            push("/");
-            console.log("User ID:", response.result.userId);
-            message.success('Login successful');
-          }
+  const loginUserHttp = useMutate({
+    path: `${process.env.NEXT_PUBLIC_PASS}/TokenAuth/Authenticate`,
+    verb: 'POST',
+  });
+
+  const createUserHttp = useMutate({
+    path: `${process.env.NEXT_PUBLIC_PASS}/services/app/Person/Create`,
+    verb: 'POST',
+  });
+
+  const loginUser = async (payload: ILogin) => {
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_PASS}/TokenAuth/Authenticate`, payload);
+      if (response.data.success) {
+        localStorage.setItem('token', response.data.result.accessToken);
+        dispatch(loginUserRequestAction(response.data.result));
+        dispatch(getUserIdDetailsRequestAction(response.data.result.userId));
+        if (response.data.result.userId === 1) {
+          window.open("http://localhost:3001/dashboard", "_blank");
+          console.log("User ID:", response.data.result.userId);
+          message.success('Login successful');
         } else {
-          message.error('Invalid username or password');
+          push("/");
+          console.log("User ID:", response.data.result.userId);
+          message.success('Login successful');
         }
-      } catch (error) {
-        console.log(error);
-        message.error('Login failed');
+      } else {
+        message.error('Invalid username or password');
       }
-    };
-  
-    const createUser = async (payload: IUser) => {
-      console.log("response::", payload);
-      try {
-        const response = await createUserHttp(payload);
-        console.log("response::", response);
-        if (response.success) {
-          message.success("User successfully created");
-          dispatch(createUserRequestAction(response.result));
-          push("/login");
-        } else {
-          message.error("Failed to create user");
-        }
-      } catch (error) {
-        console.error("User creation error:", error);
-        message.error("username or name already in use");
-      }
-    };
-  
-    const getUserDetails = async (id: number) => {
-      const token = localStorage.getItem("token");
-      try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_PASS}/services/app/User/Get?Id=${id}`, {
-          method: 'GET',
-          cache: "no-cache",
-          headers: {
-            "Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`
-          },
-        });
-        const data = await response.json();
-        dispatch(getUserDetailsRequestAction(data.result.id));
-        dispatch(getUserIdDetailsRequestAction(data.result));
-      } catch (error) {
-        console.log(error);
-        message.error("Failed to get user details");
-      }
-    };
-  
-    const logOutUser = () => {
-      dispatch(logOutUserRequestAction());
-      localStorage.removeItem('token');
-      push('/login');
-    };
-  
-    return (
-      <UserContext.Provider value={state}>
-        <UserActionContext.Provider value={{loginUser ,createUser ,getUserDetails, logOutUser}}>
-          {children}
-        </UserActionContext.Provider>
-      </UserContext.Provider>
-    );
-  };
-  
-  const useLoginState = (): IUserStateContext => {
-    const context = useContext(UserContext);
-    if (!context) {
-      throw new Error("useLoginState must be used within a UserProvider");
+    } catch (error) {
+      console.log(error);
+      message.error('Login failed');
     }
-    return context;
   };
-  
-  const useLoginActions = (): IUserActionContext => {
-    const context = useContext(UserActionContext);
-    if (!context) {
-      throw new Error("useLoginActions must be used within a UserProvider");
+
+  const createUser = async (payload: IUser) => {
+    console.log("response::", payload);
+    try {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_PASS}/services/app/Person/Create`, payload);
+      console.log("response::", response);
+      if (response.data.success) {
+        message.success("User successfully created");
+        dispatch(createUserRequestAction(response.data.result));
+        push("/login");
+      } else {
+        message.error("Failed to create user");
+      }
+    } catch (error) {
+      console.error("User creation error:", error);
+      message.error("username or name already in use");
     }
-    return context;
   };
-  
-  const useUser = (): IUserStateContext & IUserActionContext => {
-    return {
-      ...useLoginState(),
-      ...useLoginActions()
-    };
+
+  const getUserDetails = async (id: number) => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/User/Get?Id=${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          'Authorization': `Bearer ${token}`
+        },
+      });
+      dispatch(getUserDetailsRequestAction(response.data.result.id));
+      dispatch(getUserIdDetailsRequestAction(response.data.result));
+    } catch (error) {
+      console.log(error);
+      message.error("Failed to get user details");
+    }
   };
-  
-  export { UserProvider, useUser };
+
+  const logOutUser = () => {
+    dispatch(logOutUserRequestAction());
+    localStorage.removeItem('token');
+    push('/login');
+  };
+
+  return (
+    <UserContext.Provider value={state}>
+      <UserActionContext.Provider value={{ loginUser, createUser, getUserDetails, logOutUser }}>
+        {children}
+      </UserActionContext.Provider>
+    </UserContext.Provider>
+  );
+};
+
+const useLoginState = (): IUserStateContext => {
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error("useLoginState must be used within a UserProvider");
+  }
+  return context;
+};
+
+const useLoginActions = (): IUserActionContext => {
+  const context = useContext(UserActionContext);
+  if (!context) {
+    throw new Error("useLoginActions must be used within a UserProvider");
+  }
+  return context;
+};
+
+const useUser = (): IUserStateContext & IUserActionContext => {
+  return {
+    ...useLoginState(),
+    ...useLoginActions()
+  };
+};
+
+export { UserProvider, useUser };

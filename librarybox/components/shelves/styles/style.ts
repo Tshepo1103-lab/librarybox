@@ -6,10 +6,27 @@ export const useStyles = createStyles({
     margin-right: 150px;
     margin-bottom: 20px;
     align-items: center;
-    overflow: hidden;
+    overflow-x: auto;
     white-space: nowrap;
     cursor: grab;
-  `,
+    
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+   
+  }
+
+  &::-webkit-scrollbar-thumb {
+  
+    border-radius: 5px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+`,
   cardBox: css`
     padding: 30px;
     display: inline-flex;

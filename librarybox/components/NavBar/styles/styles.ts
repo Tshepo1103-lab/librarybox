@@ -8,16 +8,20 @@ navContainer: css `
     height: 50px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 0.25em;
     padding: 20px;
     color: #fff;
     cursor: pointer; 
 
-`,
+  `,
+  profile:css`
+  position:absolute;
+  right:0;
+  `,
 
     list: css `
-    
+    align-items:center;
+    margin-left:360px;
     `,
     items: css `
         padding-right:40px;
@@ -41,6 +45,9 @@ navContainer: css `
       bottom:0;
       padding-bottom:20px;
       padding-left:150px;
+      `,
+      icon:css`
+      color:#ffff;
       `,
       active: css `
       font-weight: bold;

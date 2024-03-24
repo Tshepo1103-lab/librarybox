@@ -1,7 +1,11 @@
+'use client'
+import React, { useState, useEffect } from 'react'; // Import useState and useEffect
 import styles from "./page.module.css";
 import { Button } from "antd";
 
 export default function Home() {
+  var haveToken = localStorage.getItem("token") == null ? false : true; 
+
   return (
     <main className={styles.main}>
       {/* Content */}
@@ -21,10 +25,11 @@ export default function Home() {
             <li>Saturday: 08:00 - 15:00</li>
           </ul>
         </div>
+        {haveToken===false?
         <div className={styles.buttonContainer}>
-          <Button href="/signin" className={styles.button} >Sign In</Button>
-          <Button href="/signup" className={styles.button} >Sign Up</Button>
-        </div>
+        <Button href="/login" className={styles.button}>Sign In</Button>
+        <Button href="/register" className={styles.button}>Sign Up</Button>
+      </div>:null}
       </div>
     </main>
   );

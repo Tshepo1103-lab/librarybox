@@ -1,15 +1,16 @@
 'use client'
 import React from 'react';
-import Shelves from '../../../../components/shelves/shelves';
 import Search from '../../../../components/Search/search';
+import { useStyles } from './styles/style';
+import withAuth from '../../../../Hoc/withAuth';
 
 const Catalog = () => {
-
+const {styles}=useStyles();
    return(
-    <div>
+    <div className={styles.main}>
       <Search/>
     </div>
    ) 
 }
 
-export default Catalog
+export default withAuth(Catalog)
