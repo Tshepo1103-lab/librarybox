@@ -18,6 +18,8 @@ export const useStyles = createStyles({
         text-align: center;
         color: #fff;
         background-color: #873e23;
+        z-index:999;
+        position:relative;
         `,
     contentStyle: css`
     text-align: center;

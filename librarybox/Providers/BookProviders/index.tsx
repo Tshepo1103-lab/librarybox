@@ -1,6 +1,6 @@
 import { useContext, useReducer, FC, PropsWithChildren} from "react"
 import { BookReducer } from "./reducer";
-import { INITIAL_STATE } from "./context";
+import { IBookActionStateContext, IBookStateContext, INITIAL_STATE } from "./context";
 import axios from 'axios';
 import { BookRequestAction, CategoryAction } from "./actions";
 import { BookActionContext,BookContext } from "./context";
@@ -22,6 +22,7 @@ const BookProvider :FC<PropsWithChildren<{}>> = ({ children }) => {
 
     //Get Categories
     const fetchCategory = async (id: string) => {
+
         try {
             const response = await axios.get(`https://localhost:44311/api/services/app/Category/GetAllIncluding?shelfId=${id}`);
             dispatch(CategoryAction(response.data.result));
@@ -32,19 +33,34 @@ const BookProvider :FC<PropsWithChildren<{}>> = ({ children }) => {
     };
     return(
      <BookContext.Provider value={state}>
-        <BookActionContext.Provider value={{fetchShelf}}>
+        <BookActionContext.Provider value={{fetchShelf,fetchCategory}}>
             {children}
         </BookActionContext.Provider>
      </BookContext.Provider>
     )
 }
-export default BookProvider;
 
-export const useBookState=()=>{
-    const context=useContext(BookContext);
+export const useBookState = (): IBookStateContext => {
+    const context = useContext(BookContext);
+    if (!context) {
+      throw new Error("useLoginState must be used within a UserProvider");
+    }
     return context;
- }
- export const useBookAction=()=>{
-    const context=useContext(BookActionContext);
+  };
+  
+export const useBookAction = (): IBookActionStateContext=> {
+    const context = useContext(BookActionContext);
+    if (!context) {
+      throw new Error("useBookActions must be used within a BookProvider");
+    }
     return context;
- }
+  };
+  
+  export const useBook = (): IBookStateContext & IBookActionStateContext => {
+    return {
+      ...useBookState(),
+      ...useBookAction()
+    };
+  };
+
+  export default BookProvider

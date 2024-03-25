@@ -1,5 +1,5 @@
 import React from 'react';
-import data from '../Search/template.json';
+import data from './topchoice.json'
 import { Card } from 'antd';
 import Image from 'next/image';
 import { useStyles } from './styles/style';
@@ -7,10 +7,14 @@ import { useStyles } from './styles/style';
 const TopChoice = () => {
     const {styles}=useStyles();
   return (
+    <div className={styles.container}>
+    <div className={styles.titlecontainer}>
+    <h1 className={styles.title}>Top choices</h1>
+    </div>
+    <br/>
     <div className={styles.cardBox}>
-    <h1>Top choices</h1>
       {data.map(item => (
-        <Card key={item.id} className={styles.searchCard} cover={<Image src="/assets/img/book.png" alt="Stack of books" width={240} height={160} />}>
+        <Card key={item.id} className={styles.searchCard} >
           <div>
             <h3>{item.title}</h3>
             <p>Authors: {item.authors.join(', ')}</p>
@@ -20,6 +24,7 @@ const TopChoice = () => {
           </div>
         </Card>
       ))}
+    </div>
     </div>
   );
 };

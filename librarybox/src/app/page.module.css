@@ -17,11 +17,11 @@
 .content {
   width: 450px;
   text-align: center;
-  color: #ffff;
+  color: rgb(199, 165, 165);
 }
 
 .tradingHours {
-  color: #ffff;
+  color: rgb(199, 165, 165);
   text-align: center;
   transform: translate(0%, -10%);
   width: 460px;
@@ -43,6 +43,7 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+
 }
 
 .buttonContainer {
@@ -63,4 +64,5 @@
 }
 .button:hover {
   background-color: #eab676;
+
 }

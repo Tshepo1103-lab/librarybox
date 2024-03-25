@@ -1,10 +1,11 @@
+'use client'
 import React, { createContext, FC, PropsWithChildren, useContext, useReducer } from 'react';
 import { message } from 'antd';
 import { useMutate } from 'restful-react';
 import { useRouter } from 'next/navigation';
 import { UserReducer } from './reducer';
 import { ILogin, INITIAL_STATE, IUser, IUserActionContext, IUserStateContext, UserActionContext, UserContext } from './context';
-import { createUserRequestAction, getUserDetailsRequestAction, logOutUserRequestAction, getUserIdDetailsRequestAction, loginUserRequestAction } from './actions';
+import { createUserRequestAction, getUserDetailsRequestAction, logOutUserRequestAction, getUserIdDetailsRequestAction, loginUserRequestAction, setCurrentUserRequestAction } from './actions';
 import axios from 'axios';
 
 const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
@@ -26,10 +27,12 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
       const response = await axios.post(`${process.env.NEXT_PUBLIC_PASS}/TokenAuth/Authenticate`, payload);
       if (response.data.success) {
         localStorage.setItem('token', response.data.result.accessToken);
+        localStorage.setItem('id', response.data.result.userId);
         dispatch(loginUserRequestAction(response.data.result));
-        dispatch(getUserIdDetailsRequestAction(response.data.result.userId));
+        dispatch(getUserIdDetailsRequestAction(response.data.result.userId.user));
         if (response.data.result.userId === 1) {
-          window.open("http://localhost:3001/dashboard", "_blank");
+          // window.open("http://localhost:3001/dashboard", "_blank");
+          push("/");
           console.log("User ID:", response.data.result.userId);
           message.success('Login successful');
         } else {
@@ -64,17 +67,19 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     }
   };
 
-  const getUserDetails = async (id: number) => {
+  const getUserDetails = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/User/Get?Id=${id}`, {
+     
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Session/GetCurrentLoginInformations`, {
         headers: {
           "Content-Type": "application/json",
           'Authorization': `Bearer ${token}`
         },
       });
-      dispatch(getUserDetailsRequestAction(response.data.result.id));
+      dispatch(setCurrentUserRequestAction(response.data.result.user));
       dispatch(getUserIdDetailsRequestAction(response.data.result));
+      
     } catch (error) {
       console.log(error);
       message.error("Failed to get user details");
@@ -119,4 +124,4 @@ const useUser = (): IUserStateContext & IUserActionContext => {
   };
 };
 
-export { UserProvider, useUser };
+export { UserProvider, useUser,useLoginState };

@@ -7,15 +7,21 @@ export const useStyles=createStyles({
    font-family: 'Roboto', sans-serif;
    font-size: 20px; 
     font-weight: bold; 
+    margin-top:4%;
     `,
     searchContainer: css`
-    padding: 20px 50px; 
-    margin-bottom: 3%; 
+    padding: 20px 100px; 
+    margin-bottom: 1%; 
     `,
     searchBox: css`
     width: 50%;
-    margin-top: 2%; 
-    `
+    margin-top: 2%;
+    position: fixed;
+    z-index: 999;
+    text-align: center;
+    left: 50%; 
+    transform: translateX(-50%); /* Adjust to center */
+  `
     ,
     searchCard:css`
     background: #fff;

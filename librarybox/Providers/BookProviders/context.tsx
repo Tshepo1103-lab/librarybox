@@ -1,6 +1,7 @@
 import {createContext} from 'react';
 
 export interface IShelf{
+    id:string;
     name:string;
 }
 export interface ICategory{
@@ -17,7 +18,7 @@ export interface IBookStateContext{
 
 export interface IBookActionStateContext{
     fetchShelf?:()=>void;
-    fetchCategory?:()=>void;
+    fetchCategory?:(payload:string)=>void;
 }
 
 const BookContext = createContext<IBookStateContext>(INITIAL_STATE);

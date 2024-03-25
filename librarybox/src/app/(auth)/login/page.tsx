@@ -24,7 +24,7 @@ const Login = () => {
     
 
     return (
-        <div className={styles.container}>
+        <div className={styles.form}>
             <Form onFinish={handleSubmit}>
             <Form.Item
               name="userNameOrEmailAddress"

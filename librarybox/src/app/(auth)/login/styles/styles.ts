@@ -6,6 +6,7 @@ export const useStyles=createStyles({
     padding-top:50px;
     transform: translate(-50%, -50%);
     position: absolute;
+    border: 2px solid red;
     top: 44%;
     left: 50%;
     `,

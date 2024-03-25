@@ -2,15 +2,19 @@
 import React, { useState, useEffect } from 'react'; // Import useState and useEffect
 import styles from "./page.module.css";
 import { Button } from "antd";
+import { useUser } from '../../Providers/LoginProviders';
 
 export default function Home() {
+  
   var haveToken = localStorage.getItem("token") == null ? false : true; 
+ 
 
   return (
     <main className={styles.main}>
       {/* Content */}
       <div className={styles.column}>
         <div className={styles.content}>
+          <h1></h1>
           <h1>Welcome Siyakwamukela!</h1>
           <h3>A Library for the community established in 1950</h3>
         </div>
