@@ -1,7 +1,7 @@
 .main {
   height: 88vh;
   color: #000;
-  background-image: url("/assets/img/Home.JPEG");
+  background-image: url("/assets/img/Home.JPEG"); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -65,4 +65,16 @@
 .button:hover {
   background-color: #eab676;
 
+}
+.upcoming{
+  position:absolute;
+  right:0;
+  margin-right:50px;
+  margin-top: 50px;
+  width:300px;
+  background-color: rgba(0, 0, 0, 0.2);
+ 
+}
+.upcomingTitle{
+  color: rgb(225, 211, 211);
 }

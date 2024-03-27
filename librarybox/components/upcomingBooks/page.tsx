@@ -1,16 +1,17 @@
 import React from 'react';
-import data from './topchoice.json'
+import data from '../topChoices/topchoice.json';
 import { Card } from 'antd';
 import Image from 'next/image';
 import { useStyles } from './styles/style';
 
-const TopChoice = () => {
+
+const UpcomingBook = () => {
     const {styles}=useStyles();
 
   return (
     <div className={styles.container}>
     <div className={styles.titlecontainer}>
-    <h2 className={styles.title}>Top choices</h2>
+    <h2 className={styles.title}>Upcoming Books</h2>
     </div>
     <br/>
     <div className={styles.cardBox}>
@@ -30,4 +31,4 @@ const TopChoice = () => {
   );
 };
 
-export default TopChoice;
+export default UpcomingBook;

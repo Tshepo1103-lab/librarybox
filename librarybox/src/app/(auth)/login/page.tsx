@@ -24,40 +24,41 @@ const Login = () => {
     
 
     return (
+      <div className={styles.main}>
+        <div className={styles.background}>
+        <div className={`${styles.shape} ${styles["shape:first-child"]}`}></div>
+         <div className={`${styles.shape} ${styles["shape:last-child"]}`}></div>
+
+        </div>
         <div className={styles.form}>
             <Form onFinish={handleSubmit}>
+              <h3 className={styles.loginHeader}>Login</h3>
             <Form.Item
               name="userNameOrEmailAddress"
               rules={[{ required: true, message: 'Please input your Username!' }]}
             >
-              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
+              <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" className={styles.input}/>
             </Form.Item>
+           
             <Form.Item
               name="password"
               rules={[{ required: true, message: 'Please input your Password!' }]}
             >
-              <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" />
+              <Input.Password prefix={<LockOutlined className="site-form-item-icon" />} placeholder="Password" className={styles.input}/>
             </Form.Item>
             <Form.Item>
-              <Form.Item name="remember" valuePropName="checked" noStyle>
-                <Checkbox>Remember me</Checkbox>
-              </Form.Item>
-              <a  href="">
-                Forgot password
-              </a>
-            </Form.Item>
-            <Form.Item>
-              <Button type="primary" htmlType="submit" >
+              <Button  htmlType="submit" className={styles.button} >
                 Log in
               </Button>
               <br /><br />
               <div>
-              <a href="/register">
+              <a href="/register" className={styles.text}>
                 Register now!
               </a></div>
             </Form.Item>
           </Form>
         </div>
+      </div>
     );
 }
 

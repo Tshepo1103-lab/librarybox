@@ -35,23 +35,19 @@ const Search: React.FC = () => {
 
   return (
     <div className={styles.searchContainer}>
+      <div>
       <Search
         placeholder="Search Shelves"
         allowClear
-        prefix={<SearchOutlined />}
-
         onSearch={onSearch}
         onChange={handleSearchChange}
         className={styles.searchBox}
       />
+      </div>
       {!search && searchTerm === '' && !filteredData.length && ( // Show shelves if search is not active, there's no search term, and there are no search results
         <div className={styles.container}>
           <br/>
-          <h2>Browse through the shelves</h2>
-          <br />
-          <div>
-            <Shelves />
-          </div>
+          
         </div>
       )}
       {searchTerm !== '' && (

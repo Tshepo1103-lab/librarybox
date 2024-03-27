@@ -2,11 +2,10 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { Card, Space } from 'antd';
 import { useStyles } from './styles/style';
-import { useRouter } from 'next/router';
-
 import { useBookAction, useBookState } from '../../Providers/BookProviders';
 import { IShelf } from '../../Providers/BookProviders/context';
 import Link from 'next/link';
+
 
 const Shelves: React.FC = () => {
   const { styles } = useStyles();
@@ -57,6 +56,10 @@ const Shelves: React.FC = () => {
   }, [fetchShelf]);
 
   return (
+    <>
+    <div className={styles.headercontainer}>
+    <h2 className={styles.header}>Browse the shelves</h2>
+    </div>
     <div className={styles.container} ref={containerRef}>
       <Space className={styles.cardBox}>
         {status.BookShelf?.map((item: IShelf, index: number) => (
@@ -68,6 +71,7 @@ const Shelves: React.FC = () => {
         ))}
       </Space>
     </div>
+    </>
   );
 }
 

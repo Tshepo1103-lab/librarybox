@@ -21,6 +21,7 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     path: `${process.env.NEXT_PUBLIC_PASS}/services/app/Person/Create`,
     verb: 'POST',
   });
+  
 
   const loginUser = async (payload: ILogin) => {
     try {

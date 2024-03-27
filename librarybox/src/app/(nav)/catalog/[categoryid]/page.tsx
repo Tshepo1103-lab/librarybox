@@ -1,13 +1,14 @@
 'use client'
 import React, { useEffect } from 'react';
-import { Divider, List, Typography } from 'antd';
+import { Divider, List } from 'antd';
 import { useBook, useBookState,  } from '../../../../../Providers/BookProviders';
+import { useStyles } from './styles/style';
 
 
 
 
 const Category= ({params}:{params:{categoryid:string}}) => {
-   
+  const {styles}=useStyles(); 
  const state= useBookState();
  const {fetchCategory}=useBook();
  useEffect(()=>{
@@ -16,15 +17,14 @@ const Category= ({params}:{params:{categoryid:string}}) => {
   console.log('state:',state)
 return(
   <>
-    <Divider orientation="left">Categories</Divider>
+    {/* <Divider orientation="center" ><h2 className={styles.title}>Categories</h2></Divider> */}
     <List
-      header={<div>Shelf A</div>}
-      footer={<div>Footer</div>}
-      bordered
+      header={<h2 className={styles.title}>Categories</h2>}
+      className={styles.list}
       dataSource={state.BookCategory}
       renderItem={(item) => (
-        <List.Item>
-           {item?.name}
+        <List.Item className={styles.items}>
+           <h3>{item?.name}</h3>
         </List.Item>
       )}
     />

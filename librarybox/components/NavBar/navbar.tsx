@@ -39,6 +39,7 @@ const NavBar = () => {
         {navLinks.map((link) => {
           const isActive = pathname === link.href;
           return (
+      
             <Link href={link.href} key={link.name}>
               <span className={`${styles.items} ${isActive ? styles.active : ''}`}>{link.name}</span>
             </Link>
@@ -48,7 +49,7 @@ const NavBar = () => {
       {haveToken?
       <div>
         
-          <Button onClick={() => setOpen(true)} style={{ backgroundColor: 'transparent'}}>
+          <Button onClick={() => setOpen(true)} className={styles.profileButton} >
             <UserOutlined />
           </Button>
         

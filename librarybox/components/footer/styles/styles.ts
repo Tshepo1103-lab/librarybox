@@ -14,4 +14,22 @@ column: css`
   display: flex;
   align-items: center;
 `,
+libraryBox: css`
+  font-family: 'Old Standard TT', serif; /* Use 'Old Standard TT' font */
+  font-weight: bold;
+  font-size: 50px;
+  transition: color 0.3s ease-in-out;
+  &:hover {
+    color: #eab676; 
+  }
+`
+, socials:css`
+  font-size: 30px;
+  margin-right: 10px;
+  &:hover{
+    transform: scale(1.2);
+    color: #eab676;
+  }
+`
+
 });

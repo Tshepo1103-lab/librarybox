@@ -25,7 +25,7 @@ export const useStyles = createStyles({
     text-align: center;
     height: 88vh;
     color: #000;
-    background-image: url('/assets/img/Home.JPEG'); 
+    background-color:#000;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

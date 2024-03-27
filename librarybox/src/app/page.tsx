@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react'; // Import useState and useEffect
 import styles from "./page.module.css";
 import { Button } from "antd";
-import { useUser } from '../../Providers/LoginProviders';
+import Image from 'next/image';
+import Book from '../../public/assets/img/roman.jpg'; 
 
 export default function Home() {
   

@@ -20,6 +20,12 @@ export const useStyles = createStyles({
   items: css`
     padding-right: 40px;
     font-size: 20px;
+    color: white;
+    &:hover {
+      color: #eab676;
+      font-size:22px;
+      transform: scale(1.1); 
+    }
   `,
   li: css`
     margin: 10px 20px;
@@ -28,6 +34,10 @@ export const useStyles = createStyles({
     font-size: 20px;
     display: inline-block;
     padding: 20px;
+  `,
+  profileButton:css`
+   color:#ffff;
+   background: #873e23;
   `,
   drawerItems: css`
     text-align: left;

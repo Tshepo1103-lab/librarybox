@@ -10,13 +10,14 @@ export const useStyles=createStyles({
     margin-top:4%;
     `,
     searchContainer: css`
-    padding: 20px 100px; 
-    margin-bottom: 1%; 
+    padding: 5px 100px; 
+     
     `,
     searchBox: css`
     width: 50%;
     margin-top: 2%;
     position: fixed;
+    color:red;
     z-index: 999;
     text-align: center;
     left: 50%; 
