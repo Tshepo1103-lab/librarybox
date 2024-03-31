@@ -29,6 +29,13 @@ const NavBar = () => {
   const { styles } = useStyles();
   const {logOutUser} =useUser();
   
+  // Check if the user is on the login page
+  const isLoginPage = pathname === '/login';
+
+  // Hide the navbar if the user is on the login page
+  if (isLoginPage) {
+    return null;
+  }
 
   return (
     <nav className={styles.navContainer}>
@@ -39,7 +46,6 @@ const NavBar = () => {
         {navLinks.map((link) => {
           const isActive = pathname === link.href;
           return (
-      
             <Link href={link.href} key={link.name}>
               <span className={`${styles.items} ${isActive ? styles.active : ''}`}>{link.name}</span>
             </Link>

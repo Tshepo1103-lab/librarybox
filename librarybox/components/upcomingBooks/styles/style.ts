@@ -15,7 +15,7 @@ export const useStyles = createStyles({
   `,
   searchCard: css`
     color:transparent;
-    background: url('assets/img/bookCover.jpg') center/contain; /* Adjust the image URL and properties */
+    background: url('assets/img/bookCover.jpg') 
     opacity: 1;,
     &:hover{
       color:#000;

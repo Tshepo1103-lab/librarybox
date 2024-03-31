@@ -9,6 +9,7 @@ import { Layout, Flex } from 'antd';
 import { useStyles } from "./style";
 import BookProvider from "../../Providers/BookProviders";
 import { UserProvider } from "../../Providers/LoginProviders";
+import { TransactionProvider } from "../../Providers/TransactionProvider";
 
 const inter = Inter({ subsets: ["cyrillic"] });
 const { Header, Footer, Sider, Content } = Layout;
@@ -27,6 +28,7 @@ export default function RootLayout({
       <body className={inter.className} style={{ height: '100%', margin: 0, }}>
         <UserProvider>
         <BookProvider>
+        < TransactionProvider>
         <Flex gap="middle" wrap="wrap" style={{ height: '100%' }}>
           <Layout className={styles.layoutStyle} style={{ height: '100%',}}>
             <Header className={styles.headerStyle}><NavBar/></Header>
@@ -34,6 +36,7 @@ export default function RootLayout({
             <Footer className={styles.footerStyle}><FooterContainer/></Footer>
           </Layout>
         </Flex>
+        </TransactionProvider>
         </BookProvider>
         </UserProvider>
         

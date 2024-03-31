@@ -1,8 +1,22 @@
+import React from 'react';
+import { useRouter } from 'next/router';
 import { useStyles } from './styles/styles';
 import { FacebookOutlined, LinkedinOutlined, InstagramOutlined } from '@ant-design/icons';
+import { usePathname } from 'next/navigation';
 
 const FooterContainer = () => {
   const { styles } = useStyles();
+  const pathname = usePathname();
+
+  // Check if the current page is the login page
+  const isLoginPage = pathname === '/login';
+
+  // If on the login page, don't render the footer
+  if (isLoginPage) {
+    return null;
+  }
+
+  // If not on the login page, render the footer
   return (
     <footer className={styles.footerContainer}>
       <div className={styles.column}>

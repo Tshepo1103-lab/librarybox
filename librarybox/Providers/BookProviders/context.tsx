@@ -5,8 +5,19 @@ export interface IShelf{
     name:string;
 }
 export interface ICategory{
+    id:string;
     name:string;
     shelfId:string;
+}
+export interface IBook{
+  id:string;
+  isbn: string;
+  title: string;
+  description: string;
+  authors: string[];
+  quantity: number;
+  url: string;
+  categoryId: string;
 }
 
 export const INITIAL_STATE:IBookStateContext={};
@@ -14,11 +25,13 @@ export const INITIAL_STATE:IBookStateContext={};
 export interface IBookStateContext{
     readonly BookShelf?:IShelf[];
     readonly BookCategory?:ICategory[];
+    readonly CategoryBooks?:IBook[];
 }
 
 export interface IBookActionStateContext{
     fetchShelf?:()=>void;
     fetchCategory?:(payload:string)=>void;
+    fetchBooks?:(payload:string)=>void;
 }
 
 const BookContext = createContext<IBookStateContext>(INITIAL_STATE);

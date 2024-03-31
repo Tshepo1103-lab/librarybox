@@ -63,7 +63,7 @@ const Shelves: React.FC = () => {
     <div className={styles.container} ref={containerRef}>
       <Space className={styles.cardBox}>
         {status.BookShelf?.map((item: IShelf, index: number) => (
-          <Link href={{ pathname: `/catalog/${item.id}` }} key={item.id}>
+          <Link href={{ pathname: `/catalog/shelf/${item.id}` }} key={item.id}>
             <Card className={styles.card}>
               <h1>{item.name}</h1>
             </Card>

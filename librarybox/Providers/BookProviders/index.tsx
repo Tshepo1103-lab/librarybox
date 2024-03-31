@@ -1,9 +1,8 @@
 import { useContext, useReducer, FC, PropsWithChildren} from "react"
 import { BookReducer } from "./reducer";
 import { IBookActionStateContext, IBookStateContext, INITIAL_STATE } from "./context";
-import { BookRequestAction, CategoryAction } from "./actions";
+import { BookRequestAction, BooksAction, CategoryAction } from "./actions";
 import { BookActionContext,BookContext } from "./context";
-import { AxiosInstance } from "axios";
 import { instance } from "../axiosInstance";
 
 
@@ -28,14 +27,24 @@ const BookProvider :FC<PropsWithChildren<{}>> = ({ children }) => {
         try {
             const response = await instance.get(`https://localhost:44311/api/services/app/Category/GetAllIncluding?shelfId=${id}`);
             dispatch(CategoryAction(response.data.result));
-            console.log(response.data.result);
+      
+            
         } catch (error) {
             console.error(error);
         }
     };
+    
+    const fetchBooks = async (id:string)=>{
+      try{
+        const response = await instance.get(`https://localhost:44311/api/services/app/Book/GetAllBooksByCategory?categoryId=${id}`)
+        dispatch(BooksAction(response.data.result));
+      }catch(err){
+        console.error(err)
+      }
+    }
     return(
      <BookContext.Provider value={state}>
-        <BookActionContext.Provider value={{fetchShelf,fetchCategory}}>
+        <BookActionContext.Provider value={{fetchShelf,fetchCategory,fetchBooks}}>
             {children}
         </BookActionContext.Provider>
      </BookContext.Provider>

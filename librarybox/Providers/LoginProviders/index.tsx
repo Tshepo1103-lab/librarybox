@@ -1,31 +1,20 @@
 'use client'
-import React, { createContext, FC, PropsWithChildren, useContext, useReducer } from 'react';
+import React, { FC, PropsWithChildren, useContext, useReducer } from 'react';
 import { message } from 'antd';
-import { useMutate } from 'restful-react';
 import { useRouter } from 'next/navigation';
 import { UserReducer } from './reducer';
 import { ILogin, INITIAL_STATE, IUser, IUserActionContext, IUserStateContext, UserActionContext, UserContext } from './context';
-import { createUserRequestAction, getUserDetailsRequestAction, logOutUserRequestAction, getUserIdDetailsRequestAction, loginUserRequestAction, setCurrentUserRequestAction } from './actions';
-import axios from 'axios';
+import { createUserRequestAction, logOutUserRequestAction, getUserIdDetailsRequestAction, loginUserRequestAction, setCurrentUserRequestAction } from './actions';
+import { instance } from '../axiosInstance';
 
 const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   const [state, dispatch] = useReducer(UserReducer, INITIAL_STATE);
   const { push } = useRouter();
 
-  const loginUserHttp = useMutate({
-    path: `${process.env.NEXT_PUBLIC_PASS}/TokenAuth/Authenticate`,
-    verb: 'POST',
-  });
-
-  const createUserHttp = useMutate({
-    path: `${process.env.NEXT_PUBLIC_PASS}/services/app/Person/Create`,
-    verb: 'POST',
-  });
-  
-
+ 
   const loginUser = async (payload: ILogin) => {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_PASS}/TokenAuth/Authenticate`, payload);
+      const response = await instance.post(`${process.env.NEXT_PUBLIC_PASS}/TokenAuth/Authenticate`, payload);
       if (response.data.success) {
         localStorage.setItem('token', response.data.result.accessToken);
         localStorage.setItem('id', response.data.result.userId);
@@ -51,9 +40,8 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
   };
 
   const createUser = async (payload: IUser) => {
-    console.log("response::", payload);
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_PASS}/services/app/Person/Create`, payload);
+      const response = await instance.post(`${process.env.NEXT_PUBLIC_PASS}/services/app/Person/Create`, payload);
       console.log("response::", response);
       if (response.data.success) {
         message.success("User successfully created");
@@ -72,7 +60,7 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     const token = localStorage.getItem("token");
     try {
      
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Session/GetCurrentLoginInformations`, {
+      const response = await instance.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Session/GetCurrentLoginInformations`, {
         headers: {
           "Content-Type": "application/json",
           'Authorization': `Bearer ${token}`
@@ -82,7 +70,6 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
       dispatch(getUserIdDetailsRequestAction(response.data.result));
       
     } catch (error) {
-      console.log(error);
       message.error("Failed to get user details");
     }
   };
