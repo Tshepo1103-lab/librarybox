@@ -1,6 +1,10 @@
 import { createStyles,css } from "antd-style";
 
 export const useStyles=createStyles({
+    main:css`
+    background-color: #eab676;
+    height: 100vh;
+    `,
     data:css`
     grid-gap: 30px;
     padding: 30px;
@@ -18,7 +22,7 @@ export const useStyles=createStyles({
     box-shadow: 5px 15px 5px 2px rgba(0, 0, 0, 0.09);
     transition: background 0.3s ease-in-out;
     overflow: hidden;
-    height:330px;
-    width:300px
+    height:300px;
+    width:200px
     `
 })

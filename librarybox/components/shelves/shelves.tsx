@@ -58,8 +58,10 @@ const Shelves: React.FC = () => {
   return (
     <>
     <div className={styles.headercontainer}>
+      <br/>
     <h2 className={styles.header}>Browse the shelves</h2>
     </div>
+    <br/>
     <div className={styles.container} ref={containerRef}>
       <Space className={styles.cardBox}>
         {status.BookShelf?.map((item: IShelf, index: number) => (

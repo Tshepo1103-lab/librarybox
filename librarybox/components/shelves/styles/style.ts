@@ -2,8 +2,8 @@ import { createStyles, css } from "antd-style";
 
 export const useStyles = createStyles({
   container: css`
-    margin-left: 150px;
-    margin-right: 150px;
+    margin-left: 90px;
+    margin-right: 90px;
     margin-bottom: 20px;
     align-items: center;
     overflow-x: auto;
@@ -20,6 +20,7 @@ export const useStyles = createStyles({
 `,
   header:css`
   color:#000;
+  font-family: 'Old Standard TT', serif;
   `,
   headercontainer: css`
   margin-left:40px;

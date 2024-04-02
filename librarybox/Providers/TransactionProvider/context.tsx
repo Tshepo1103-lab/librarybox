@@ -8,15 +8,18 @@ export interface ITransaction{
     UserId:string;
 }
 
+
 export const INITIAL_STATE:ITransactionStateContext={};
 
 export interface ITransactionStateContext{
     readonly CreateTransaction?: ITransaction; 
+    readonly FetchTransaction?: ITransaction[];
 
 }
 
 export interface ITransactionActionContext{
     createtransaction?:(payload:ITransaction) => void;
+    fetchtransaction?:(payload:string) =>void;
     
 }
 

@@ -8,14 +8,16 @@ export const useStyles = createStyles({
     height: 50px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     padding: 0.25em;
     padding: 20px;
     color: #fff;
     cursor: pointer;
   `,
   list: css`
-  
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  flex-grow: 1; 
   `,
   items: css`
     padding-right: 40px;
@@ -23,8 +25,7 @@ export const useStyles = createStyles({
     color: white;
     &:hover {
       color: #eab676;
-      font-size:22px;
-      transform: scale(1.1); 
+      transform: scale(1.7); 
     }
   `,
   li: css`
@@ -36,9 +37,13 @@ export const useStyles = createStyles({
     padding: 20px;
   `,
   profileButton:css`
-   color:#ffff;
-   background: #873e23;
-  `,
+  color:#ffff;
+  background: #873e23;
+  position:absolute;
+  right:0;
+  top:15px;
+`, 
+
   drawerItems: css`
     text-align: left;
   `,

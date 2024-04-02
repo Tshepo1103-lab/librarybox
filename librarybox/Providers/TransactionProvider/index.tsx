@@ -2,7 +2,7 @@ import { FC, PropsWithChildren, useContext, useReducer } from "react";
 import { instance } from "../axiosInstance";
 import { INITIAL_STATE, ITransaction, ITransactionActionContext, ITransactionStateContext, TransactionActionContext, TransactionContext } from "./context";
 import { TransactionReducer } from "./reducer";
-import { createTransactionRequestAction } from "./actions";
+import { FetchTransactionRequestAction, createTransactionRequestAction } from "./actions";
 import { message } from "antd";
 
 const TransactionProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
@@ -21,10 +21,25 @@ const TransactionProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
             console.error(error);
         }
     };
+    const fetchtransaction = async (id:string) =>{
+        try{
+            const response = await instance.get(`https://localhost:44311/api/services/app/Transaction/GetAllIncluding?userId=${id}`)
+            if (response.data.success) {
+                message.success("Fetched successfully ");
+                console.log(response.data)
+                dispatch(FetchTransactionRequestAction(response.data.result));
+            } else {
+                message.error("Failed ");
+            }
+        }
+        catch(error){
+            console.error(error)
+        }
+    }
 
     return (
         <TransactionContext.Provider value={state}>
-            <TransactionActionContext.Provider value={{createtransaction}}>
+            <TransactionActionContext.Provider value={{createtransaction,fetchtransaction}}>
                 {children}
             </TransactionActionContext.Provider>
         </TransactionContext.Provider>

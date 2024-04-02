@@ -13,7 +13,7 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "Catalogue", href: "/catalog" },
   { name: "About", href: "/about" },
-  { name: "Contact", href: "/contact" },
+  { name: "Bookings", href: "/contact" },
 ];
 
 const NavBar = () => {
@@ -69,10 +69,14 @@ const NavBar = () => {
               <Link href="/">Update profile</Link>
             </Button>
             <hr style={{ margin: '15px 0', borderColor: '#eab676'}} />
-            <h2>Upcoming Book</h2>
+            <h2>Recently borrowed</h2>
             <div>
               <a><Image className={styles.img} src={Book} alt="Book" /></a>
             </div>
+            <br/>
+            <Button style={{ backgroundColor: 'transparent'}}>
+              <Link href="/history">View more</Link>
+            </Button>
             <hr style={{ margin: '15px 0', borderColor: '#eab676'}} />
           </div>
           <div>

@@ -7,6 +7,7 @@ export const useStyles = createStyles({
   `,
   title: css`
     color: #000;
+    font-family: 'Old Standard TT', serif;
   `,
   titlecontainer: css`
     height: 40px;
@@ -15,7 +16,7 @@ export const useStyles = createStyles({
   `,
   searchCard: css`
     color:transparent;
-    background: url('assets/img/bookCover.jpg') 
+    background: url('assets/img/bookCover.jpg') center/contain; 
     opacity: 1;,
     &:hover{
       color:#000;
@@ -32,6 +33,7 @@ export const useStyles = createStyles({
     &:hover {
       background: linear-gradient(to bottom right,#fff, #eab676, #873e00);;
       transform: scale(1.1); /* Zoom in */
+      z-index:999;
     }
   `,
   cardBox: css`

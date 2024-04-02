@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState } from 'react';
-import { Button, Card, Flex, message } from 'antd';
-import Image from 'next/image';
+import { Button, Card, Flex, message, Result } from 'antd';
+import {Image as AntdImage} from 'antd';
 import { useStyles } from './styles/style';
 import useLocalStorageBook from '@/utilis/Book';
 import { useTransaction } from '../../../../../../Providers/TransactionProvider';
@@ -10,9 +10,7 @@ const Book = ({ params }: { params: { bookId: string } }) => {
     const { styles } = useStyles();
     const { setBookToLocalStorage, getBookInfo } = useLocalStorageBook();
     const { createtransaction } = useTransaction();
-
-    const [userId, setUserId] = useState('');
-
+    const [showResult, setShowResult] = useState(false);
 
     useEffect(() => {
         setBookToLocalStorage(params.bookId);
@@ -42,43 +40,47 @@ const Book = ({ params }: { params: { bookId: string } }) => {
             CheckOutDate: checkoutDate,
             DueDate: dueDate,
             ReturnedDate:  new Date(), // Assuming book has not been returned yet
-            BookId:getBookInfo(params.bookId)?.id,
-            UserId:'8'
+            BookId: getBookInfo(params.bookId)?.id,
+            UserId: '8'
         };
 
         // Call the createTransaction method to store the transaction
-        console.log(transaction);
-        if(createtransaction){
+        if (createtransaction) {
             createtransaction(transaction);
+            setShowResult(true);
         }
-       
     };
 
     return (
         <>
             <Flex>
-                <Card hoverable className={styles.card}>
-                    <Flex justify="space-between">
-                        <Image
-                            alt="avatar"
-                            src="/assets/img/bookCover.jpg"
-                            width={500}
-                            height={550}
-                        />
-                        <Flex vertical align="flex-start" justify="space-between" style={{ padding: 40 }}>
-                            <h1 className={styles.title}>{getBookInfo(params.bookId)?.title}</h1>
-                            <h5 className={styles.title}>
-                                {getBookInfo(params.bookId)?.description}
-                            </h5>
-                            <Button type="primary" onClick={handleClick} className={styles.btn} >
-                                Borrow
-                            </Button>
+            {showResult ? (
+                    <div className={styles.resultContainer}>
+                        <h1 className={styles.resultTitle}>Successfully Borrowed a book!</h1>
+                        <p className={styles.resultSubtitle}>Rev number: 2017182818828182881 use this number to collect your book.</p>
+                        <div className={styles.resultExtraButtons}>
+                            <Button type="primary">Go Home</Button>
+                            <Button>Borrow more</Button>
+                        </div>
+                    </div>
+                ) : (
+                    <Card hoverable className={styles.card}>
+                        <Flex justify="space-between">
+                          
+                        <AntdImage src={getBookInfo(params.bookId)?.url} alt="Stack of books" width={1200} height={500} />
+                            <Flex vertical align="flex-start" justify="space-between" style={{ padding: 40 }}>
+                                <h1 className={styles.title}>{getBookInfo(params.bookId)?.title}</h1>
+                                <h5 className={styles.title}>
+                                    {getBookInfo(params.bookId)?.description}
+                                </h5>
+                                <Button type="primary" onClick={handleClick} className={styles.btn} >
+                                    Borrow
+                                </Button>
+                            </Flex>
                         </Flex>
-                    </Flex>
-                </Card>
-                <Card hoverable className={styles.sidecard}>
-
-                </Card>
+                    </Card>
+                )}
+                
             </Flex>
         </>
     );

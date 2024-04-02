@@ -16,6 +16,7 @@
 
 .content {
   width: 450px;
+  transform: translate(20%, 120%);
   text-align: center;
   color: rgb(199, 165, 165);
 }
@@ -23,7 +24,7 @@
 .tradingHours {
   color: rgb(199, 165, 165);
   text-align: center;
-  transform: translate(0%, -10%);
+  transform: translate(20%, 30%);
   width: 460px;
   padding: 30px 30px;
   box-sizing: border-box;
@@ -32,6 +33,8 @@
   border-radius: 10%;
   margin-top: 80px;
 }
+
+
 
 .tradingHours h4 {
   margin-bottom: 30px;
@@ -47,23 +50,28 @@
 }
 
 .buttonContainer {
+  transform: translate(20%, 120%);
   text-align: left;
   width: 30%;
   display: flex;
   justify-content: space-between;
   margin-top: 80px;
+
 }
 
-.button {
+.twobutton {
   width: 200px;
   height: 50px;
   border-radius: 15px;
   background-color: #873e23;
   font-size: 20px;
   color:#fff;
+  font-size:20px;
 }
-.button:hover {
-  background-color: #eab676;
+.twobutton:hover{
+  background-color: #eab676 !important;
+  border: 1px solid #fff !important;
+  color:#000 !important;
 
 }
 .upcoming{
@@ -78,3 +86,4 @@
 .upcomingTitle{
   color: rgb(225, 211, 211);
 }
+

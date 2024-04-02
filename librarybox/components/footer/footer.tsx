@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useStyles } from './styles/styles';
 import { FacebookOutlined, LinkedinOutlined, InstagramOutlined } from '@ant-design/icons';
 import { usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 const FooterContainer = () => {
   const { styles } = useStyles();
@@ -27,9 +28,9 @@ const FooterContainer = () => {
       </div>
       <div className={styles.column}>
         <div>
-          <FacebookOutlined className={styles.socials}/>
-          <LinkedinOutlined className={styles.socials}/>
-          <InstagramOutlined className={styles.socials}/>
+          <Link href='https://www.facebook.com/' target='_blank'><FacebookOutlined className={styles.socials}/></Link>
+          <Link href='https://www.linkedin.com/in/tshepo-mahlangu-592970247/' target='_blank'><LinkedinOutlined className={styles.socials}/></Link>
+          <Link href='https://www.instagram.com/' target='_blank'><InstagramOutlined className={styles.socials}/></Link>
         </div>
       </div>
     </footer>

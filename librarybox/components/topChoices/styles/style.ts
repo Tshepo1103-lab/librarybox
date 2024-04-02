@@ -7,6 +7,7 @@ export const useStyles = createStyles({
   `,
   title: css`
     color: #000;
+    font-family: 'Old Standard TT', serif;
   `,
   titlecontainer: css`
     height: 40px;
@@ -15,13 +16,11 @@ export const useStyles = createStyles({
   `,
   searchCard: css`
     color:transparent;
-    background: url('assets/img/bookCover.jpg') center/contain; /* Adjust the image URL and properties */
+    background: url('assets/img/bookCover.jpg') center/contain; 
     opacity: 1;,
     &:hover{
       color:#000;
     }
-
-    
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 5px 15px 5px 2px rgba(0, 0, 0, 0.09);
@@ -31,13 +30,13 @@ export const useStyles = createStyles({
     width: 250px;
     &:hover {
       background: linear-gradient(to bottom right,#fff, #eab676, #873e00);;
-      transform: scale(1.1); /* Zoom in */
+      transform: scale(1.1); 
+      z-index:999;
     }
   `,
   cardBox: css`
   padding: 30px;
   display: flex;
-  justify-content: space-between; 
   flex-wrap: nowrap;
   transition: transform 0.9s ease-in-out;
   user-select: none;

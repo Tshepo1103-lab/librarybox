@@ -2,7 +2,7 @@ import { createStyles, css } from "antd-style";
 
 export const useStyles = createStyles({
   main: css`
-    background-color: #eab676;
+  background-image: url("/assets/img/cover.jpeg"); 
   `,
   form: css`
     width: 400px;

@@ -1,15 +1,15 @@
+'use client'
 import React, { useState } from 'react';
 import { Input, Card } from 'antd';
 import type { SearchProps } from 'antd/es/input/Search';
 import { useStyles } from './styles/styles';
 import data from './template.json';
 import Image from 'next/image';
-import Shelves from '../shelves/shelves';
-import { SearchOutlined } from '@ant-design/icons';
+
 
 const { Meta } = Card;
 
-const Search: React.FC = () => {
+const Search: React.FC<SearchProps> = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const { styles } = useStyles();
   const { Search } = Input;
@@ -36,21 +36,15 @@ const Search: React.FC = () => {
   return (
     <div className={styles.searchContainer}>
       <div>
-      <Search
-        placeholder="Search Shelves"
-        allowClear
-        onSearch={onSearch}
-        onChange={handleSearchChange}
-        className={styles.searchBox}
-      />
+        <Search
+          placeholder="Search Shelves"
+          allowClear
+          onSearch={onSearch}
+          onChange={handleSearchChange}
+          className={styles.searchBox}
+        />
       </div>
-      {!search && searchTerm === '' && !filteredData.length && ( // Show shelves if search is not active, there's no search term, and there are no search results
-        <div className={styles.container}>
-          <br/>
-          
-        </div>
-      )}
-      {searchTerm !== '' && (
+      {search && searchTerm !== '' ? (
         <>
           {filteredData.length > 0 ? (
             <div className={styles.data}>
@@ -72,6 +66,9 @@ const Search: React.FC = () => {
             </div>
           )}
         </>
+      ) : (
+        // Conditionally render children container only if children are present
+        children ? <div className={styles.container}>{children}</div> : null
       )}
     </div>
   );

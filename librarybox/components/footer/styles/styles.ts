@@ -26,6 +26,7 @@ libraryBox: css`
 , socials:css`
   font-size: 30px;
   margin-right: 10px;
+  transition: color 0.3s ease-in-out;
   &:hover{
     transform: scale(1.2);
     color: #eab676;

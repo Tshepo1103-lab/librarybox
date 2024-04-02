@@ -32,8 +32,8 @@ export default function Home() {
         </div>
         {haveToken===false?
         <div className={styles.buttonContainer}>
-        <Button href="/login" className={styles.button}>Sign In</Button>
-        <Button href="/register" className={styles.button}>Sign Up</Button>
+        <Button href="/login" className={styles.twobutton}>Sign In</Button>
+        <Button href="/register" className={styles.twobutton}>Sign Up</Button>
       </div>:null}
       </div>
     </main>

@@ -3,11 +3,13 @@ import { createStyles,css } from "antd-style";
 export const useStyles=createStyles({
   main:css`
   background-color:#eab676;
+  height: 100vh
   
   `,
    scroll:css`
    overflow-y:auto;
-   height:72vh;
+   height:80vh;
+   padding: 20px;
    &::-webkit-scrollbar {
        width: 5px;
      }
@@ -19,3 +21,4 @@ export const useStyles=createStyles({
    `
    
 })
+

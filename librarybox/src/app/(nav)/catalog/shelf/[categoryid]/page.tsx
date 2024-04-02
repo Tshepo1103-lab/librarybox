@@ -15,21 +15,24 @@ const Category=({ params}:{params:{categoryid:string}}) => {
       fetchCategory&&fetchCategory(params.categoryid);
   },[]);
 return(
-  <>
+  <div className={styles.main}>
+    <div>
+    <h1 className={styles.title}>Categories</h1>
     <List
-      header={<h2 className={styles.title}>Categories</h2>}
       className={styles.list}
       dataSource={state.BookCategory}
       renderItem={(item) => (
 
         <Link href={{ pathname: `/catalog/showbooks/${item.id}` }} key={item.id}>
         <List.Item className={styles.items}>
-           <h3>{item?.name}</h3>
+           <h3 className={styles.itemText}>{item?.name}</h3>
         </List.Item>
         </Link>
       )}
     />
-  </>
+    </div>
+     
+  </div>
 )};
 
 export default Category;
