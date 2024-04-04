@@ -8,6 +8,7 @@ import Image from 'next/image';
 import BookNestLogo from '../../public/assets/img/lib.png'; 
 import Book from '../../public/assets/img/roman.jpg'; 
 import { useLoginState, useUser } from '../../Providers/LoginProviders';
+import { useTransaction, useTransactionState } from '../../Providers/TransactionProvider';
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -22,7 +23,19 @@ const NavBar = () => {
   useEffect(() => {
     getUserDetails && getUserDetails();
   }, []);
+ 
+  const status = useTransactionState();
+  const data=status.FetchTransaction && status.FetchTransaction[0] && status.FetchTransaction[0].book?.url;
+  const { fetchtransaction } = useTransaction();
 
+
+  useEffect(() => {
+    if (fetchtransaction) {
+      if (state.currentUser?.id) {
+        fetchtransaction(state.currentUser.id);
+      }
+    }
+  }, []);
   const haveToken = localStorage.getItem("token") !== null;
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -71,7 +84,7 @@ const NavBar = () => {
             <hr style={{ margin: '15px 0', borderColor: '#eab676'}} />
             <h2>Recently borrowed</h2>
             <div>
-              <a><Image className={styles.img} src={Book} alt="Book" /></a>
+              <a><img className={styles.img} src={data} alt="Book" /></a>
             </div>
             <br/>
             <Button style={{ backgroundColor: 'transparent'}}>

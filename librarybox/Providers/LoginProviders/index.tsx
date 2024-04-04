@@ -70,7 +70,7 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
       dispatch(getUserIdDetailsRequestAction(response.data.result));
       
     } catch (error) {
-      message.error("Failed to get user details");
+      message.error("User not logged in");
     }
   };
 

@@ -1,26 +1,40 @@
 'use client'
-import React, { useState, useEffect } from 'react'; // Import useState and useEffect
+import React, { useEffect } from 'react';
 import styles from "./page.module.css";
 import { Button } from "antd";
-import Image from 'next/image';
-import Book from '../../public/assets/img/roman.jpg'; 
+import { useConfig, useConfigState } from '../../Providers/ConfigProvider';
 
 export default function Home() {
-  
   var haveToken = localStorage.getItem("token") == null ? false : true; 
- 
+  const state = useConfigState();
+  const { fetchConfig } = useConfig();
+
+  useEffect(() => {
+    fetchConfig && fetchConfig();
+    
+  },[]);
+  useEffect(()=>{
+    
+      if (state.FetchConfig) {
+          const ConfigData = [state.FetchConfig[0]];
+          localStorage.setItem('Config', JSON.stringify(ConfigData));
+      } 
+  },[state])
+
+  // console.log(state.FetchConfig);
 
   return (
     <main className={styles.main}>
       {/* Content */}
-      <div className={styles.column}>
+      {state.FetchConfig?.map(item=> (
+        <div className={styles.column} key={item.name}>
         <div className={styles.content}>
           <h1></h1>
-          <h1>Welcome Siyakwamukela!</h1>
-          <h3>A Library for the community established in 1950</h3>
+          <h1>{item?.welcomeMessage}</h1>
+          <h3>{item?.aboutMessage}</h3>
         </div>
       </div>
-
+      ))}
       {/* Trading Hours */}
       <div className={styles.column}>
         <div className={styles.tradingHours}>
@@ -30,11 +44,12 @@ export default function Home() {
             <li>Saturday: 08:00 - 15:00</li>
           </ul>
         </div>
-        {haveToken===false?
-        <div className={styles.buttonContainer}>
-        <Button href="/login" className={styles.twobutton}>Sign In</Button>
-        <Button href="/register" className={styles.twobutton}>Sign Up</Button>
-      </div>:null}
+        {haveToken === false ?
+          <div className={styles.buttonContainer}>
+            <Button href="/login" className={styles.twobutton}>Sign In</Button>
+            <Button href="/register" className={styles.twobutton}>Sign Up</Button>
+          </div> : null
+        }
       </div>
     </main>
   );

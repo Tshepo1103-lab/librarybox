@@ -11,7 +11,7 @@ export const useStyles = createStyles({
      
     headerStyle: css`
         text-align: right;
-        background-color: #873e23;
+        background-color: #873e23 ;
     `,
     
     footerStyle: css`

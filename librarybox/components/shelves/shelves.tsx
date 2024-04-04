@@ -53,7 +53,7 @@ const Shelves: React.FC = () => {
 
   useEffect(() => {
     fetchShelf && fetchShelf();
-  }, [fetchShelf]);
+  }, []);
 
   return (
     <>

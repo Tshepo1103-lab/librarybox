@@ -26,12 +26,14 @@ export interface IBookStateContext{
     readonly BookShelf?:IShelf[];
     readonly BookCategory?:ICategory[];
     readonly CategoryBooks?:IBook[];
+   
 }
 
 export interface IBookActionStateContext{
     fetchShelf?:()=>void;
     fetchCategory?:(payload:string)=>void;
     fetchBooks?:(payload:string)=>void;
+   
 }
 
 const BookContext = createContext<IBookStateContext>(INITIAL_STATE);

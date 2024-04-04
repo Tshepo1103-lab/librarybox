@@ -22,7 +22,7 @@ export const useStyles = createStyles({
   items: css`
     padding-right: 40px;
     font-size: 20px;
-    color: white;
+    color: #ffffff;
     &:hover {
       color: #eab676;
       transform: scale(1.7); 
@@ -35,6 +35,7 @@ export const useStyles = createStyles({
     font-size: 20px;
     display: inline-block;
     padding: 20px;
+   
   `,
   profileButton:css`
   color:#ffff;

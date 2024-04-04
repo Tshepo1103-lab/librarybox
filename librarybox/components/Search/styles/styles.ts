@@ -15,9 +15,7 @@ export const useStyles = createStyles({
     width: 50%;
     margin-top: 2%;
     position: fixed;
-    color: red;
     z-index: 999;
-    text-align: center;
     left: 50%; 
     transform: translateX(-50%); 
   `,

@@ -8,6 +8,8 @@ export const useStyles = createStyles({
   title: css`
     color: #000;
     font-family: 'Old Standard TT', serif;
+  `,titleBook:css`
+  
   `,
   titlecontainer: css`
     height: 40px;
@@ -21,22 +23,27 @@ export const useStyles = createStyles({
     &:hover{
       color:#000;
     }
+
+    
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 5px 15px 5px 2px rgba(0, 0, 0, 0.09);
     transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
     overflow: hidden;
-    height: 300px;
-    width: 250px;
+    height: 290px;
+    width: 220px;
     &:hover {
-      background: linear-gradient(to bottom right,#fff, #eab676, #873e00);;
-      transform: scale(1.1); 
+      background: linear-gradient(to bottom right,#fff, #eab676, #873e00) !important;
+      transform: scale(1.1); /* Zoom in */
+      color: #000;
+      font-family: 'Old Standard TT', serif;
       z-index:999;
     }
   `,
   cardBox: css`
   padding: 30px;
   display: flex;
+  justify-content: space-between; 
   flex-wrap: nowrap;
   transition: transform 0.9s ease-in-out;
   user-select: none;

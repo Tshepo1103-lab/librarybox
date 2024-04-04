@@ -1,19 +1,10 @@
 'use client'
 import { LikeOutlined, MessageOutlined, StarOutlined } from '@ant-design/icons';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Avatar, List, Space } from 'antd';
 import { useStyles } from './styles/style'; 
 import { useTransaction, useTransactionState } from '../../Providers/TransactionProvider';
-
-const data = Array.from({ length: 23 }).map((_, i) => ({
-  href: 'https://ant.design',
-  title: `ant design part ${i}`,
-  avatar: `https://api.dicebear.com/7.x/miniavs/svg?seed=${i}`,
-  description:
-    'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-  content:
-    'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.',
-}));
+import { useLoginState, useUser} from '../../Providers/LoginProviders';
 
 const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
   <Space>
@@ -22,48 +13,48 @@ const IconText = ({ icon, text }: { icon: React.FC; text: string }) => (
   </Space>
 );
 
-const TransactionHistory = () => {
-  const state= useTransactionState();
- const {fetchtransaction}=useTransaction();
- useEffect(()=>{
-      fetchtransaction&&fetchtransaction('8');
-  },[]);
-  console.log('state',state);
+const getStatusDescription = (status: number) => {
+  switch (status) {
+    case 0:
+      return "Ready to be collected";
+    case 1:
+      return "Collected";
+    case 2:
+      return "Returned";
+    case 3:
+      return "Overdue";
+    default:
+      return "Unknown";
+  }
+};
 
+const TransactionHistory = () => {
+  const status = useTransactionState();
+  const {styles}=useStyles();
   return (
     <div className={useStyles().styles.main}> 
+    <h1>My Borrowed Books History</h1>
       <List
-        itemLayout="vertical"
-        size="large"
-        pagination={{
-          onChange: (page) => {
-            console.log(page);
-          },
-          pageSize: 3,
-        }}
-        dataSource={data}
-        footer={
-          <div>
-            <b>ant design</b> footer part
-          </div>
-        }
-        renderItem={(item) => (
-          <List.Item
-            key={item.title}
-            extra={
-              <img
-                width={272}
-                alt="logo"
-                src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-              />
-            }
-          >
+        className={styles.container}
+        itemLayout="horizontal"
+        dataSource={status.FetchTransaction}
+        renderItem={(item, index) => (
+          <List.Item className={styles.items}>
             <List.Item.Meta
-              avatar={<Avatar src={item.avatar} />}
-              title={<a href={item.href}>{item.title}</a>}
-              description={item.description}
+              avatar={<img src={item.book?.url} alt="Book Cover" className={styles.imageContainer}/>}
+             
             />
-            {item.content}
+            <div className={styles.status}>
+            <h2>{getStatusDescription( item.status&&item.status)}</h2> 
+            </div>
+            <div className={styles.details}>
+              <h4>Title: {item.book?.title&& item.book.title}</h4>
+              <br/>
+              <p>Check out date: { item.checkOutDate&&item.checkOutDate}</p>
+              <p>Due date: {item.dueDate && item.dueDate}</p>
+              <p>Returned date: {item.returnedDate && item.returnedDate}</p>
+
+            </div>
           </List.Item>
         )}
       />

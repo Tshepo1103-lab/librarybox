@@ -18,15 +18,16 @@ const ShowBooks = ({ params }: { params: { showbooksId: string } }) => {
 
   return (
     <div className={styles.main}>
+      <div className={styles.header}>
+        <br/><br/>
+      <h1 className={styles.header}>Explore the books</h1>
+      </div>
       <div className={styles.data}>
         {state.CategoryBooks?.map((item: IBook, index) => (
           <Link href={{ pathname: `/catalog/book/${index}` }} key={item.id}>
-            <Card key={item.id} className={styles.searchCard} cover={<AntdImage src={item.url} alt="Stack of books" width={200} height={250} />}>
+            <Card key={item.id} className={styles.searchCard} cover={<img src={item.url} alt="Stack of books" width={200} height={250} />}>
               <div>
-                <h3>{item.title}</h3>
-                <p>Authors: {item.authors.join(', ')}</p>
-                <p>ISBN: {item.isbn}</p>
-                <p>Category: {item.categoryId}</p>
+                <h3 className={styles.title}>{item.title}</h3>
               </div>
             </Card>
           </Link>

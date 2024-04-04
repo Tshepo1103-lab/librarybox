@@ -4,7 +4,9 @@ import { IBook, IBookStateContext, ICategory, IShelf } from "./context";
 export enum BookActionEnums{
     Shelf="SHELF",
     Category="CATEGORY",
-    Books="BOOKS"
+    Books="BOOKS",
+    TopChoice="TOP"
+
 }
 
 export const BookRequestAction = createAction<IBookStateContext, IShelf[]>(BookActionEnums.Shelf,(BookShelf)=>({BookShelf}))

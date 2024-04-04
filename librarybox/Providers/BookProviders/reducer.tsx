@@ -10,6 +10,7 @@ export function BookReducer(incomingState:IBookStateContext,action:ReduxActions.
             return {...payload}
         case BookActionEnums.Books:
             return {...payload}
+    
         default:
             return incomingState;
     }

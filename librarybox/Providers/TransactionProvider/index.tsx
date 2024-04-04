@@ -6,7 +6,7 @@ import { FetchTransactionRequestAction, createTransactionRequestAction } from ".
 import { message } from "antd";
 
 const TransactionProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
-    const [state, dispatch] = useReducer(TransactionReducer, INITIAL_STATE);
+    const [status, dispatch] = useReducer(TransactionReducer, INITIAL_STATE);
 
     const createtransaction = async (payload: ITransaction) => {
         try {
@@ -17,28 +17,30 @@ const TransactionProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
             } else {
                 message.error("Failed ");
             }
-        } catch (error) {
-            console.error(error);
+
+            
+        } catch (error:any) {
+            message.error(error.response.data.error.message)
+           
         }
     };
     const fetchtransaction = async (id:string) =>{
         try{
             const response = await instance.get(`https://localhost:44311/api/services/app/Transaction/GetAllIncluding?userId=${id}`)
             if (response.data.success) {
-                message.success("Fetched successfully ");
-                console.log(response.data)
+                //message.success("Fetched successfully ");
                 dispatch(FetchTransactionRequestAction(response.data.result));
             } else {
                 message.error("Failed ");
             }
         }
-        catch(error){
-            console.error(error)
+        catch(error:any){
+            message.error(error.data.error.message)
         }
     }
 
     return (
-        <TransactionContext.Provider value={state}>
+        <TransactionContext.Provider value={status}>
             <TransactionActionContext.Provider value={{createtransaction,fetchtransaction}}>
                 {children}
             </TransactionActionContext.Provider>

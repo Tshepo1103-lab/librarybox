@@ -9,7 +9,7 @@ export const useStyles = createStyles({
     `,
     list: css`
     border-radius: 15px;
-    width: 250%;
+    width: 350%;
     transform: translateX(-25%);
     text-align: center;
     background-color: #ba946c;
@@ -17,6 +17,13 @@ export const useStyles = createStyles({
     height: 60vh;
     opacity: 0.8;
     overflow-y: scroll; 
+    &::-webkit-scrollbar {
+        width: 5px;
+      }
+      &::-webkit-scrollbar-thumb {
+      
+        border-radius: 5px;
+      }
     
     `,
     title: css`
@@ -29,9 +36,10 @@ export const useStyles = createStyles({
         margin-right: 20px;
         margin-bottom: 10px;
         background-color: #873e23;
+        border-radius:5px;
         text-align:center;
         &:hover {
-            border: 2px solid #fff;
+            background-color:#eab676;
         }
     `,
     itemText: css`     

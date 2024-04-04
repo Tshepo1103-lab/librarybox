@@ -1,11 +1,16 @@
 import { createContext } from "react";
+import { IBook } from "../BookProviders/context";
+import { IUser } from "../LoginProviders/context";
 
 export interface ITransaction{
-    CheckOutDate:Date;
-    DueDate:Date;
-    ReturnedDate:Date | null;
-    BookId:string | undefined;
-    UserId:string;
+    checkOutDate?:string;
+    dueDate?:string;
+    returnedDate?:string | null;
+    bookId?:string | undefined;
+    UserId?:string;
+    book?:IBook;
+    user?:IUser;
+    status:number;
 }
 
 
