@@ -16,15 +16,17 @@ export const useStyles = createStyles({
     width: 1200px;
     align-items: center;
     margin-left: 250px;
-    overflow-y:scroll;
+    overflow-y:auto;
+    height: 70vh;
     &::-webkit-scrollbar {
-        width: 5px;
-      }
+      width: 5px;
+    }
+  
+    &::-webkit-scrollbar-thumb {
     
-      &::-webkit-scrollbar-thumb {
-      
-        border-radius: 5px;
-      }
+      border-radius: 5px;
+    }
+    
   `,
   searchCard: css`
     background: linear-gradient(to bottom right, #fff, #eab676, #873e23);

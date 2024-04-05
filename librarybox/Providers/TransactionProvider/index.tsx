@@ -28,10 +28,10 @@ const TransactionProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
         try{
             const response = await instance.get(`https://localhost:44311/api/services/app/Transaction/GetAllIncluding?userId=${id}`)
             if (response.data.success) {
-                //message.success("Fetched successfully ");
+                message.success("Fetched successfully");
                 dispatch(FetchTransactionRequestAction(response.data.result));
             } else {
-                message.error("Failed ");
+                message.error("Failed");
             }
         }
         catch(error:any){

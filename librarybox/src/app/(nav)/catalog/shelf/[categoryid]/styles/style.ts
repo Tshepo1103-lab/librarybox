@@ -2,7 +2,7 @@ import { createStyles, css } from "antd-style";
 
 export const useStyles = createStyles({
     main: css`
-    background-color: #eab676;
+    background-color:  #d3a962;
     height: 100vh;
     display: flex;
     justify-content: center;

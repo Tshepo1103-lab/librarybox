@@ -1,11 +1,14 @@
+'use client'
 import React from 'react'
+import { useStyles } from './styles/style';
 
 
 const About = () => {
+  const { styles } = useStyles();
   return (
     <div>
-      <div>
-        <h1>About us</h1>
+      <div className={styles.image}>
+           
       </div>
       <div>
         

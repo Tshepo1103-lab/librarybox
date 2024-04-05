@@ -26,7 +26,6 @@ export const useStyles = createStyles({
   margin-left:40px;
   margin-right:40px;
   height: 40px;
-  background-color: #eab676;
   opacity: 1; 
 `,
   cardBox: css`

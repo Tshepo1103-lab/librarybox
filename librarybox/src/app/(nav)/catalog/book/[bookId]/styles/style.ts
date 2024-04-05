@@ -33,6 +33,15 @@ export const useStyles = createStyles({
     `,
     btn: css`
         background-color: #873e23;
+        font-size:18px;
+        width:150px;
+        height:40px;
+        transition: background 0.3s ease-in-out, transform 0.9s ease-in-out, opacity 0.9s ease-in-out;
+        &:hover{
+            background-color:#873e23 !important;
+            border:2px solid #fff;
+            transform: scale(1.1);
+        }
     `,
     resultContainer: css`
         padding: 20px;

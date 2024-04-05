@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useStyles } from './styles/styles';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
@@ -9,6 +9,11 @@ import BookNestLogo from '../../public/assets/img/lib.png';
 import Book from '../../public/assets/img/roman.jpg'; 
 import { useLoginState, useUser } from '../../Providers/LoginProviders';
 import { useTransaction, useTransactionState } from '../../Providers/TransactionProvider';
+import { IUser } from '../../Providers/LoginProviders/context';
+import { useConfigState } from '../../Providers/ConfigProvider';
+import { ConfigReducer } from '../../Providers/ConfigProvider/reducer';
+import { ConfigAction } from '../../Providers/ConfigProvider/actions';
+import { IConfig } from '../../Providers/ConfigProvider/context';
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -19,23 +24,47 @@ const navLinks = [
 
 const NavBar = () => {
   const state = useLoginState();
-  const { getUserDetails } = useUser();
-  useEffect(() => {
-    getUserDetails && getUserDetails();
-  }, []);
- 
   const status = useTransactionState();
-  const data=status.FetchTransaction && status.FetchTransaction[0] && status.FetchTransaction[0].book?.url;
+  const { getUserDetails } = useUser();
   const { fetchtransaction } = useTransaction();
+  const [userId, setUserId] = useState('');
 
+  const states = useConfigState();
+  const [s, dispatch]=useReducer(ConfigReducer,states);
 
-  useEffect(() => {
-    if (fetchtransaction) {
-      if (state.currentUser?.id) {
-        fetchtransaction(state.currentUser.id);
-      }
+  const title = s.FetchConfig && s.FetchConfig[0] && s.FetchConfig[0].name;
+  const color = states.FetchConfig && states.FetchConfig[0] && states.FetchConfig[0].primaryColor;
+
+  useEffect(()=>{
+   
+    if(localStorage.getItem('Config') ){
+    
+      const ans = localStorage.getItem('Config');
+      const newtypeAns:IConfig[] = ans? JSON.parse(ans): [];
+ 
+      dispatch(ConfigAction(newtypeAns));
+      const dataConfig: IConfig[] = ans ? JSON.parse(ans) : [];
+
     }
-  }, []);
+  },[state])
+  
+  
+  useEffect(() => {
+    getUserDetails && getUserDetails().then((user: IUser) => {
+      if (user && user.id) {
+        setUserId(user.id); // Set the userId state when user details are fetched
+      }
+    });
+  }, [state]);
+  
+  useEffect(() => {
+    if (fetchtransaction && userId) { // Ensure userId is not null
+      fetchtransaction(userId); // Call fetchtransaction with userId
+    }
+  }, [userId]);
+
+  const data=status.FetchTransaction && status.FetchTransaction[0] && status.FetchTransaction[0].book?.url;
+  
   const haveToken = localStorage.getItem("token") !== null;
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
@@ -50,8 +79,11 @@ const NavBar = () => {
     return null;
   }
 
+
+  
+
   return (
-    <nav className={styles.navContainer}>
+    <nav className={styles.navContainer} style={{backgroundColor: color}}>
       <div>
         <a><Image className={styles.img} src={BookNestLogo} alt="BookNest Logo" /></a>
       </div>
@@ -74,23 +106,27 @@ const NavBar = () => {
         
         <Drawer title="Profile" onClose={() => setOpen(false)} open={open} style={{ background: '#873e23' }}>
           <div className={styles.drawerItems}>
-            <h3>{state.currentUser?.name}</h3>
-            <h3>{state.currentUser?.surname}</h3>
-            <h3>{state.currentUser?.emailAddress}</h3>
+            <h2>{state.currentUser?.name}</h2>
+            <h2>{state.currentUser?.surname}</h2>
+            <h2>{state.currentUser?.emailAddress}</h2>
             <br />
-            <Button style={{ backgroundColor: 'transparent'}}>
+            <Button style={{ backgroundColor: ' #d3a962'}}>
               <Link href="/">Update profile</Link>
             </Button>
-            <hr style={{ margin: '15px 0', borderColor: '#eab676'}} />
-            <h2>Recently borrowed</h2>
-            <div>
-              <a><img className={styles.img} src={data} alt="Book" /></a>
-            </div>
-            <br/>
-            <Button style={{ backgroundColor: 'transparent'}}>
-              <Link href="/history">View more</Link>
-            </Button>
-            <hr style={{ margin: '15px 0', borderColor: '#eab676'}} />
+            {data && data.length > 0 && (
+                <>
+                  <hr style={{ margin: '15px 0', borderColor: '#eab676' }} />
+                  <h2>Recently borrowed</h2>
+                  <div>
+                    <a><img className={styles.img} src={data} alt="Book" /></a>
+                  </div>
+                  <br/>
+                  <Button style={{ backgroundColor: ' #d3a962' }}>
+                    <Link href="/history">View more</Link>
+                  </Button>
+                  <hr style={{ margin: '15px 0', borderColor: '#eab676' }} />
+                </>
+              )}
           </div>
           <div>
             <h4 className={`${styles.logout} ${styles.logoutHover}`} onClick={logOutUser}><LogoutOutlined /> Logout</h4>

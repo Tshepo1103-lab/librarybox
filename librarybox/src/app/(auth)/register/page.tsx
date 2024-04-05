@@ -103,19 +103,21 @@ function Register() {
       form={form}
       name="register"
       onFinish={onFinish}
-      initialValues={{prefix: '27' }}
+      initialValues={{ prefix: '27' }}
       style={{ maxWidth: 600 }}
-      scrollToFirstError 
-      className={styles.form}>
+      scrollToFirstError
+      className={styles.form} // Apply the styles.form className here
+    >
       <div className={styles.header}>
         <h2>Register</h2>
         <p>Create an account</p>
       </div>
-     <Form.Item
+      <Form.Item
         name="userName"
         label="Username"
         tooltip="What do you want others to call you?"
-        rules={[{ required: true, message: 'Please input your username!', whitespace: true }]}>
+        rules={[{ required: true, message: 'Please input your username!', whitespace: true }]}
+      >
         <Input />
       </Form.Item>
       <Form.Item
@@ -180,29 +182,6 @@ function Register() {
       >
         <Input.Password />
       </Form.Item>
-
-      {/* <Form.Item
-        name="confirm"
-        label="Confirm Password"
-        dependencies={['password']}
-        hasFeedback
-        rules={[
-          {
-            required: true,
-            message: 'Please confirm your password!',
-          },
-          ({ getFieldValue }) => ({
-            validator(_, value) {
-              if (!value || getFieldValue('password') === value) {
-                return Promise.resolve();
-              }
-              return Promise.reject(new Error('The new password that you entered do not match!'));
-            },
-          }),
-        ]}
-      >
-        <Input.Password />
-      </Form.Item> */}
            <Form.Item
         name="phoneNumber"
         label="phone"
@@ -217,7 +196,7 @@ function Register() {
           },
         ]}
       >
-        <Input />
+      <Input />
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">

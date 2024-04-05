@@ -35,7 +35,7 @@ export interface IUserActionContext{
   createUser?:(payload:IUser) => void;
   logOutUser?:() => void;
   setCurrentUser?:(user:IUser) => void;
-  getUserDetails?:() => void
+  getUserDetails?: () => Promise<IUser>;
   setUserId?: (userId: number) => void;
 }
 

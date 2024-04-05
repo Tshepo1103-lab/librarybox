@@ -47,6 +47,8 @@ export const useStyles = createStyles({
 
   drawerItems: css`
     text-align: left;
+    color: #000;
+    font-family: 'Old Standard TT', serif;
   `,
   logout: css`
     position: absolute;
@@ -58,7 +60,7 @@ export const useStyles = createStyles({
   `,
   logoutHover: css`
     &:hover {
-      color: red; 
+      color: #d3a962;; 
     }
   `,
   active: css`

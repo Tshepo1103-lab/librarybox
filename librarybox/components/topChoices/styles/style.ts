@@ -13,7 +13,6 @@ export const useStyles = createStyles({
   `,
   titlecontainer: css`
     height: 40px;
-    background-color: #eab676;
     opacity: 1; 
   `,
   searchCard: css`
@@ -28,7 +27,7 @@ export const useStyles = createStyles({
     border-radius: 10px;
     cursor: pointer;
     box-shadow: 5px 15px 5px 2px rgba(0, 0, 0, 0.09);
-    transition: background 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transition: background 0.3s ease-in-out, transform 0.9s ease-in-out, opacity 0.9s ease-in-out;
     overflow: hidden;
     height: 290px;
     width: 220px;

@@ -16,7 +16,6 @@ const TopProvider :FC<PropsWithChildren<{}>> = ({ children }) => {
       try{
         const response= await instance.get(`https://localhost:44311/api/services/app/Book/GetTop5BooksByCount`);
         dispatch(TopChoiceAction(response.data.result));
-        console.log(response.data.result)
       }
       catch(error){
         console.error(error);

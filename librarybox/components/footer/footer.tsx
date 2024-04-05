@@ -18,22 +18,21 @@ const FooterContainer = () => {
   const [s, dispatch]=useReducer(ConfigReducer,state);
 
   const title = s.FetchConfig && s.FetchConfig[0] && s.FetchConfig[0].name;
-
   const color = state.FetchConfig && state.FetchConfig[0] && state.FetchConfig[0].primaryColor;
 
   useEffect(()=>{
-    console.log('test1')
+   
     if(localStorage.getItem('Config') ){
-      console.log('test2')
+    
       const ans = localStorage.getItem('Config');
       const newtypeAns:IConfig[] = ans? JSON.parse(ans): [];
-  console.log('NewState',newtypeAns)
+ 
       dispatch(ConfigAction(newtypeAns));
       const dataConfig: IConfig[] = ans ? JSON.parse(ans) : [];
 
     }
   },[state])
-  console.log(state.FetchConfig,'state in comonent fooyrt',title)
+  
 
   // Check if the current page is the login page
   const isLoginPage = pathname === '/login';

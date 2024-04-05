@@ -4,6 +4,7 @@ import { Card } from 'antd';
 import Image from 'next/image';
 import { useStyles } from './styles/style';
 import { useTop, useTopState } from '../../Providers/TopChoiceProvider';
+import Link from 'next/link';
 
 const TopChoice = () => {
     const { styles } = useStyles();
@@ -25,9 +26,10 @@ const TopChoice = () => {
             </div>
             <br />
             <div className={styles.cardBox}>
-                {status.FetchTopchoice?.map(item => (
-                    <Card
-                        key={item.id}
+                {status.FetchTopchoice?.map((item,index) => (
+                    <Link  href={{ pathname: `/catalog/book/${index}` }}  key={item.id}>
+                      <Card
+                       
                         className={`${styles.searchCard} top-choice-card`}
                         style={{ backgroundImage: `url(${item.url})` }} // Set background image
                     >
@@ -37,6 +39,7 @@ const TopChoice = () => {
                             <p>ISBN: {item.isbn}</p>
                         </div>
                     </Card>
+                    </Link>
                 ))}
             </div>
         </div>

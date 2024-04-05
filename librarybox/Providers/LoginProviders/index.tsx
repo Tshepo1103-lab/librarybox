@@ -23,11 +23,11 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
         if (response.data.result.userId === 1) {
           // window.open("http://localhost:3001/dashboard", "_blank");
           push("/");
-          console.log("User ID:", response.data.result.userId);
+         
           message.success('Login successful');
         } else {
           push("/");
-          console.log("User ID:", response.data.result.userId);
+         
           message.success('Login successful');
         }
       } else {
@@ -56,21 +56,22 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
     }
   };
 
-  const getUserDetails = async () => {
+  const getUserDetails = async (): Promise<IUser> => {
     const token = localStorage.getItem("token");
     try {
-     
       const response = await instance.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Session/GetCurrentLoginInformations`, {
         headers: {
           "Content-Type": "application/json",
           'Authorization': `Bearer ${token}`
         },
       });
-      dispatch(setCurrentUserRequestAction(response.data.result.user));
+      const user = response.data.result.user;
+      dispatch(setCurrentUserRequestAction(user));
       dispatch(getUserIdDetailsRequestAction(response.data.result));
-      
+      return user; // Return the user details
     } catch (error) {
-      message.error("User not logged in");
+      message.error("User not logged");
+      throw error; // Re-throw the error to be handled by the caller
     }
   };
 
@@ -105,7 +106,7 @@ const useLoginActions = (): IUserActionContext => {
   return context;
 };
 
-const useUser = (): IUserStateContext & IUserActionContext => {
+const useUser:any = (): IUserStateContext & IUserActionContext => {
   return {
     ...useLoginState(),
     ...useLoginActions()

@@ -62,6 +62,7 @@ const Search: React.FC<SearchProps> = ({ children }) => {
             </div>
           ) : (
             <div className={styles.container}>
+              <br/>
               <h2>No results found</h2>
             </div>
           )}

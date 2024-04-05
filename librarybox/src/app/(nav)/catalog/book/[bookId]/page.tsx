@@ -11,7 +11,7 @@ import { toString ,toInteger} from 'lodash';
 
 const Book = ({ params }: { params: { bookId: string } }) => {
     const { styles } = useStyles();
-    const { setBookToLocalStorage, getBookInfo } = useLocalStorageBook();
+    const { setBookToLocalStorage, getBookInfo,setBookToLocalStorageTop } = useLocalStorageBook();
     const { createtransaction ,fetchtransaction} = useTransaction();
     const [showResult, setShowResult] = useState(false);
     const state = useLoginState();
@@ -24,6 +24,7 @@ const Book = ({ params }: { params: { bookId: string } }) => {
 
     useEffect(() => {
         setBookToLocalStorage(params.bookId);
+        setBookToLocalStorageTop(params.bookId)
     }, []);
 
     const handleClick = async () => {
@@ -87,7 +88,7 @@ const Book = ({ params }: { params: { bookId: string } }) => {
                                 </div>
                                 <div>
                                     <h2 className={styles.detailsTitle}>More details...</h2>
-                                    <p>ISBN   : {getBookInfo(params.bookId)?.isbn}</p>
+                                    <p>ISBN: {getBookInfo(params.bookId)?.isbn}</p>
                                     <p>Authors: {getBookInfo(params.bookId)?.authors}</p>
                                 </div>
                             </Flex>

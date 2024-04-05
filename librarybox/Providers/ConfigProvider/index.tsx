@@ -10,21 +10,20 @@ import { instance } from "../axiosInstance";
 
 //Provider that will be wrapped around the children on the layout page
 const ConfigProvider :FC<PropsWithChildren<{}>> = ({ children }) => {
-    const [state, dispatch] = useReducer(ConfigReducer, INITIAL_STATE);
+    const [states, dispatch] = useReducer(ConfigReducer, INITIAL_STATE);
 
     
     const fetchConfig= async()=>{
       try{
         const response= await instance.get(`https://localhost:44311/api/services/app/AppConfiguration/GetAll`);
         dispatch(ConfigAction(response.data.result.items));
-        console.log(response)
       }
       catch(error){
         console.error(error);
       }
     }
     return(
-     <ConfigContext.Provider value={state}>
+     <ConfigContext.Provider value={states}>
         <ConfigActionContext.Provider value={{fetchConfig}}>
             {children}
         </ConfigActionContext.Provider>
