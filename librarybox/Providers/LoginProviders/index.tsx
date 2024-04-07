@@ -17,7 +17,6 @@ const UserProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
       const response = await instance.post(`${process.env.NEXT_PUBLIC_PASS}/TokenAuth/Authenticate`, payload);
       if (response.data.success) {
         localStorage.setItem('token', response.data.result.accessToken);
-        localStorage.setItem('id', response.data.result.userId);
         dispatch(loginUserRequestAction(response.data.result));
         dispatch(getUserIdDetailsRequestAction(response.data.result.userId.user));
         if (response.data.result.userId === 1) {

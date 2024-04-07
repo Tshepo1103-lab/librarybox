@@ -10,16 +10,14 @@ export const useStyles = createStyles({
         `,
      
     headerStyle: css`
-        text-align: right;
-        background-color: #873e23 ;
+        padding:0;
+        background-color: #873e23;
     `,
     
     footerStyle: css`
-        text-align: center;
-        color: #fff;
-        background-color: #873e23;
-        z-index:999;
-        position:relative;
+       background-color: #873e23;
+       padding:0;
+       z-index:999;
         `,
     contentStyle: css`
     text-align: center;

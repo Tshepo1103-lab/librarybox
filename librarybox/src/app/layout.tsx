@@ -35,7 +35,7 @@ export default function RootLayout({
         <ConfigProvider>
         <Flex gap="middle" wrap="wrap" style={{ height: '100%' }}>
           <Layout className={styles.layoutStyle} style={{ height: '100%',}}>
-            <Header className={styles.headerStyle}><NavBar/></Header>
+            <Header  className={styles.headerStyle}><NavBar/></Header>
             <Content className={styles.contentStyle}> {children}</Content>
             <Footer className={styles.footerStyle}><FooterContainer/></Footer>
           </Layout>

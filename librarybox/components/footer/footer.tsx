@@ -12,13 +12,12 @@ import { ConfigAction } from '../../Providers/ConfigProvider/actions';
 
 const FooterContainer = () => {
   const { styles } = useStyles();
-
   const pathname = usePathname();
   const state = useConfigState();
   const [s, dispatch]=useReducer(ConfigReducer,state);
 
   const title = s.FetchConfig && s.FetchConfig[0] && s.FetchConfig[0].name;
-  const color = state.FetchConfig && state.FetchConfig[0] && state.FetchConfig[0].primaryColor;
+  const color = s.FetchConfig && s.FetchConfig[0] && s.FetchConfig[0].primaryColor;
 
   useEffect(()=>{
    
@@ -32,13 +31,19 @@ const FooterContainer = () => {
 
     }
   },[state])
+
+
   
 
   // Check if the current page is the login page
   const isLoginPage = pathname === '/login';
+  const isRegister =pathname==='/register';
 
   // If on the login page, don't render the footer
   if (isLoginPage) {
+    return null;
+  }
+  if(isRegister){
     return null;
   }
 
@@ -51,7 +56,7 @@ const FooterContainer = () => {
         <h1 className={styles.libraryBox}>{title}</h1>
       </div>
       <div className={styles.column}>
-        <h5>© {new Date().getFullYear()} LibraryBox. All rights reserved.</h5>
+        <h5>© {new Date().getFullYear()} {title}. All rights reserved.</h5>
       </div>
       <div className={styles.column}>
         <div>

@@ -2,13 +2,16 @@ import { createStyles, css } from "antd-style";
 
 export const useStyles = createStyles({
   footerContainer: css`
-  height: 50px;
-  align-items: center;
-  color: white;
-  display: flex;
   justify-content: space-between;
-  padding: 0 20px;
-  z-index: 999;
+  z-index: 999; 
+  width: 100%;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  padding: 0.25em;
+  padding: 20px;
+  color: #fff;
+  cursor: pointer;
 `,
 column: css`
   display: flex;

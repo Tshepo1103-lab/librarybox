@@ -6,7 +6,6 @@ import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Drawer, Button } from 'antd';
 import Image from 'next/image'; 
 import BookNestLogo from '../../public/assets/img/lib.png'; 
-import Book from '../../public/assets/img/roman.jpg'; 
 import { useLoginState, useUser } from '../../Providers/LoginProviders';
 import { useTransaction, useTransactionState } from '../../Providers/TransactionProvider';
 import { IUser } from '../../Providers/LoginProviders/context';
@@ -19,7 +18,6 @@ const navLinks = [
   { name: "Home", href: "/" },
   { name: "Catalogue", href: "/catalog" },
   { name: "About", href: "/about" },
-  { name: "Bookings", href: "/contact" },
 ];
 
 const NavBar = () => {
@@ -33,7 +31,7 @@ const NavBar = () => {
   const [s, dispatch]=useReducer(ConfigReducer,states);
 
   const title = s.FetchConfig && s.FetchConfig[0] && s.FetchConfig[0].name;
-  const color = states.FetchConfig && states.FetchConfig[0] && states.FetchConfig[0].primaryColor;
+  const color = s.FetchConfig && s.FetchConfig[0] && s.FetchConfig[0].primaryColor;
 
   useEffect(()=>{
    
@@ -55,7 +53,7 @@ const NavBar = () => {
         setUserId(user.id); // Set the userId state when user details are fetched
       }
     });
-  }, [state]);
+  }, []);
   
   useEffect(() => {
     if (fetchtransaction && userId) { // Ensure userId is not null
@@ -63,7 +61,7 @@ const NavBar = () => {
     }
   }, [userId]);
 
-  const data=status.FetchTransaction && status.FetchTransaction[0] && status.FetchTransaction[0].book?.url;
+  const data=status.FetchTransaction && status.FetchTransaction[status.FetchTransaction.length-1] && status.FetchTransaction[status.FetchTransaction.length-1].book?.url;
   
   const haveToken = localStorage.getItem("token") !== null;
   const [open, setOpen] = useState(false);
@@ -73,10 +71,14 @@ const NavBar = () => {
   
   // Check if the user is on the login page
   const isLoginPage = pathname === '/login';
+  const isRegister =pathname==='/register'
 
   // Hide the navbar if the user is on the login page
   if (isLoginPage) {
     return null;
+  }
+  if(isRegister){
+    return null
   }
 
 
@@ -100,19 +102,17 @@ const NavBar = () => {
       {haveToken?
       <div>
         
-          <Button onClick={() => setOpen(true)} className={styles.profileButton} >
+          <Button onClick={() => setOpen(true)} className={styles.profileButton} style={{backgroundColor: color}}>
             <UserOutlined />
           </Button>
         
-        <Drawer title="Profile" onClose={() => setOpen(false)} open={open} style={{ background: '#873e23' }}>
+        <Drawer title="Profile" onClose={() => setOpen(false)} open={open} style={{backgroundColor: color}}>
           <div className={styles.drawerItems}>
             <h2>{state.currentUser?.name}</h2>
             <h2>{state.currentUser?.surname}</h2>
             <h2>{state.currentUser?.emailAddress}</h2>
             <br />
-            <Button style={{ backgroundColor: ' #d3a962'}}>
-              <Link href="/">Update profile</Link>
-            </Button>
+          
             {data && data.length > 0 && (
                 <>
                   <hr style={{ margin: '15px 0', borderColor: '#eab676' }} />

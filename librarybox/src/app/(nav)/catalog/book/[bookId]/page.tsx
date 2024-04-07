@@ -15,17 +15,19 @@ const Book = ({ params }: { params: { bookId: string } }) => {
     const { createtransaction ,fetchtransaction} = useTransaction();
     const [showResult, setShowResult] = useState(false);
     const state = useLoginState();
-    const status = useTransactionState();
-    const { getUserDetails } = useUser();
+   
+    // const { getUserDetails } = useUser();
 
-    useEffect(() => {
-      getUserDetails && getUserDetails();
-    }, []);
+    // useEffect(() => {
+    //   getUserDetails && getUserDetails();
+    // }, []);
 
     useEffect(() => {
         setBookToLocalStorage(params.bookId);
         setBookToLocalStorageTop(params.bookId)
+       
     }, []);
+   
 
     const handleClick = async () => {
         

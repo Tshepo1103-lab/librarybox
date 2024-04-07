@@ -38,7 +38,7 @@ export default function Home() {
       {/* Trading Hours */}
       <div className={styles.column}>
         <div className={styles.tradingHours}>
-          <h4>Trading Hours</h4>
+          <h4>Plan your visit</h4>
           <ul>
             <li>Weekdays: 07:30 - 22:00</li>
             <li>Saturday: 08:00 - 15:00</li>

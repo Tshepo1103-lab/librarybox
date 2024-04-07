@@ -17,7 +17,6 @@ const Login = () => {
         console.log('Received values of form: ', values);
         if(loginUser){
             loginUser (values);
-            localStorage.setItem('name', values.userNameOrEmailAddress)
           }
 
     };

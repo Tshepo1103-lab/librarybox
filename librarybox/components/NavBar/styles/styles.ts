@@ -5,7 +5,7 @@ export const useStyles = createStyles({
     position: relative;
     top: 0;
     width: 100%;
-    height: 50px;
+    height: 68px;
     display: flex;
     align-items: center;
     padding: 0.25em;
@@ -13,11 +13,15 @@ export const useStyles = createStyles({
     color: #fff;
     cursor: pointer;
   `,
+  picContainer:css`
+  padding:20px;
+  `,
   list: css`
   display: flex;
-  justify-content: center;
-  align-items: center; 
-  flex-grow: 1; 
+  width:100%;
+  justify-content: center !important; 
+  align-items: center;
+  flex-grow: 1;
   `,
   items: css`
     padding-right: 40px;
@@ -43,6 +47,7 @@ export const useStyles = createStyles({
   position:absolute;
   right:0;
   top:15px;
+  margin-right:20px;
 `, 
 
   drawerItems: css`
@@ -69,4 +74,6 @@ export const useStyles = createStyles({
   img: css`
     margin-top: 25px;
   `,
+  drawer:css`
+  background-color:#873e23`
 });

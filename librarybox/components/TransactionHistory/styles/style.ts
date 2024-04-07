@@ -38,17 +38,20 @@ export const useStyles = createStyles({
    margin-right:50px;
   `,
   status: css`
-  width: 300px;
+  width: 200px;
   border: 2px solid #873e23;
   border-radius:10px;
   transform: translateX(-50%);
   position: absolute;
+  align-items:center;
   left: 50%;
 `,imageContainer:css`
 margin-top:40px;
 margin-left:20px;
 border: 2px solid #873e23;
+`,header:css`
+color:#000;
+font-family: 'Old Standard TT', serif;
+background-color:#eab676;
 `
-
-  
 });

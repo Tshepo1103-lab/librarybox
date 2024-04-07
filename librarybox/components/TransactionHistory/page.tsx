@@ -33,7 +33,8 @@ const TransactionHistory = () => {
   const {styles}=useStyles();
   return (
     <div className={useStyles().styles.main}> 
-    <h1>My Borrowed Books History</h1>
+    <br/>
+    <h1 className={styles.header}>Transaction History</h1>
       <List
         className={styles.container}
         itemLayout="horizontal"
