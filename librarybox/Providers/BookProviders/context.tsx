@@ -9,6 +9,11 @@ export interface ICategory{
     name:string;
     shelfId:string;
 }
+
+export interface Ifilter{
+    filterby?:string;
+    filtervalue?:string;
+}
 export interface IBook{
   id:string;
   isbn: string;
@@ -26,6 +31,7 @@ export interface IBookStateContext{
     readonly BookShelf?:IShelf[];
     readonly BookCategory?:ICategory[];
     readonly CategoryBooks?:IBook[];
+    readonly SearchBooks?:IBook[];
    
 }
 
@@ -33,6 +39,7 @@ export interface IBookActionStateContext{
     fetchShelf?:()=>void;
     fetchCategory?:(payload:string)=>void;
     fetchBooks?:(payload:string)=>void;
+    searchBooks?:(payload:Ifilter)=>void;
    
 }
 

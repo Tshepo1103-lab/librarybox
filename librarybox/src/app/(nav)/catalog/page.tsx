@@ -15,7 +15,6 @@ const Catalog = () => {
         <div className={styles.scroll}>
           <Shelves />   
           <TopChoice/>
-         
         </div>
       </Search>
     </div>

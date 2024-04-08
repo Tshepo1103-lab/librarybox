@@ -1,7 +1,7 @@
 import { useContext, useReducer, FC, PropsWithChildren} from "react"
 import { BookReducer } from "./reducer";
-import { IBookActionStateContext, IBookStateContext, INITIAL_STATE } from "./context";
-import { BookRequestAction, BooksAction, CategoryAction} from "./actions";
+import { IBookActionStateContext, IBookStateContext, INITIAL_STATE, Ifilter } from "./context";
+import { BookRequestAction, BooksAction, CategoryAction, SearchAction} from "./actions";
 import { BookActionContext,BookContext } from "./context";
 import { instance } from "../axiosInstance";
 
@@ -42,10 +42,21 @@ const BookProvider :FC<PropsWithChildren<{}>> = ({ children }) => {
         console.error(err)
       }
     }
+    const searchBooks = async (payload:Ifilter)=>{
+      await instance.get(`https://localhost:44311/api/services/app/Book/GetAllBooks?filterby=${payload.filterby}&filtervalue=${payload.filtervalue}`).
+      then(response=>{
+        dispatch(SearchAction(response.data.result))
+        console.log(response.data.result)
+      }).catch(
+        response=>{
+          console.log(response)
+        }
+      )
+    }
     
     return(
      <BookContext.Provider value={state}>
-        <BookActionContext.Provider value={{fetchShelf,fetchCategory,fetchBooks}}>
+        <BookActionContext.Provider value={{fetchShelf,fetchCategory,fetchBooks,searchBooks}}>
             {children}
         </BookActionContext.Provider>
      </BookContext.Provider>

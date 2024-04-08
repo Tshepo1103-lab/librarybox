@@ -8,7 +8,7 @@ export function TransactionReducer(incomingState: ITransactionStateContext, acti
     switch (type) { 
       
         case TransactionActionEnum.createTransactionRequest:
-            return { ...payload };
+            return { ...incomingState,...payload };
         case TransactionActionEnum.FetchTransactionRequest:
             return { ...incomingState, ...payload };
        

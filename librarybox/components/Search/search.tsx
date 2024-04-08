@@ -1,76 +1,89 @@
 'use client'
 import React, { useState } from 'react';
-import { Input, Card } from 'antd';
+import { Input, Card, Form, Select, Button } from 'antd';
 import type { SearchProps } from 'antd/es/input/Search';
 import { useStyles } from './styles/styles';
 import data from './template.json';
 import Image from 'next/image';
+import { Ifilter } from '../../Providers/BookProviders/context';
+import { useBook, useBookAction, useBookState } from '../../Providers/BookProviders';
+import { SearchOutlined } from '@ant-design/icons';
+import Link from 'next/link';
 
 
 const { Meta } = Card;
+const {Option}=Select;
 
 const Search: React.FC<SearchProps> = ({ children }) => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const { styles } = useStyles();
-  const { Search } = Input;
-  const [search, setSearch] = useState<boolean>(false); // Initialize search state
+  const {searchBooks}=useBookAction();
+  const state=useBookState();
 
-  const onSearch: SearchProps['onSearch'] = (value, _e, info) => {
-    console.log(info?.source, value);
-    setSearch(true); // Set search state to true when user performs a search
-  };
-
-  const filteredData = data.filter(item =>
-    searchTerm !== '' &&
-    (item.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.authors.some(author => author.toLowerCase().includes(searchTerm.toLowerCase())) ||
-    item.isbn.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    item.category.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-    setSearch(e.target.value !== ''); // Toggle search state based on whether there's a search term
-  };
+  const onFinish=(values:Ifilter)=>{
+    if(searchBooks)
+      searchBooks(values)
+  }
 
   return (
     <div className={styles.searchContainer}>
       <div>
-        <Search
-          placeholder="Search Shelves"
-          allowClear
-          onSearch={onSearch}
-          onChange={handleSearchChange}
-          className={styles.searchBox}
-        />
+        <Form
+         style={{display:'flex',flexDirection:'row',marginLeft:30}}
+         onFinish={onFinish}
+         className={styles.searchBox}
+          >
+          {/* filter */}
+          <Form.Item
+            name="filterby"
+            style={{width:100,marginLeft:30}}
+          >
+            <Select>
+              <Option value={"title"}>title</Option>
+              <Option value={"author"}>author</Option>
+              <Option value={"isbn"}>isbn</Option>
+              <Option value={"category"}>category</Option>
+            </Select>
+          </Form.Item>
+          {/* search */}
+          <Form.Item
+            name="filtervalue"
+            
+          >
+            <Input placeholder='search here' style={{width:500,height:30}} onChange={(e)=>setSearchTerm(e.target.value)}/>
+          </Form.Item>
+          {/* {button} */}
+          <Form.Item>
+            <Button htmlType='submit'><SearchOutlined /></Button>
+          </Form.Item>
+        </Form>
       </div>
-      {search && searchTerm !== '' ? (
-        <>
-          {filteredData.length > 0 ? (
+      { searchTerm !== '' ? (
+          <>
+          {state.SearchBooks&&state.SearchBooks? (
             <div className={styles.data}>
-              {filteredData.map(item => (
-                <Card key={item.id} className={styles.searchCard} cover={<Image src="/assets/img/book.png" alt="Stack of books" width={240} height={160} />}>
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>Authors: {item.authors.join(', ')}</p>
-                    <p>ISBN: {item.isbn}</p>
-                    <p>Category: {item.category}</p>
-                    <p>Shelf: {item.shelf}</p>
-                  </div>
-                </Card>
-              ))}
+              {state.SearchBooks&&state.SearchBooks?.map((item,index) => (
+                  <Link href={{ pathname: `/catalog/book/${index}` }} key={item.id}>
+                    <Card key={item.id} className={styles.searchCard} cover={<img src={item.url} alt="Stack of books" width={200} height={250} />}>
+                      <div>
+                        <h3 className={styles.title}>{item.title}</h3>
+                      </div>
+                    </Card>
+                  </Link>
+                ))}
             </div>
           ) : (
             <div className={styles.container}>
               <br/>
               <h2>No results found</h2>
             </div>
-          )}
+          )
+          }
         </>
       ) : (
         // Conditionally render children container only if children are present
         children ? <div className={styles.container}>{children}</div> : null
-      )}
+      )} 
     </div>
   );
 };
