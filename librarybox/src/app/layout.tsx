@@ -5,10 +5,12 @@ import "./globals.css";
 import NavBar from "../../components/NavBar/navbar";
 import FooterContainer from "../../components/footer/footer";
 import { Layout, Flex } from 'antd';
-
 import { useStyles } from "./style";
 import BookProvider from "../../Providers/BookProviders";
 import { UserProvider } from "../../Providers/LoginProviders";
+import { TransactionProvider } from "../../Providers/TransactionProvider";
+import TopProvider from "../../Providers/TopChoiceProvider";
+import ConfigProvider from  '../../Providers/ConfigProvider'
 
 const inter = Inter({ subsets: ["cyrillic"] });
 const { Header, Footer, Sider, Content } = Layout;
@@ -22,18 +24,26 @@ export default function RootLayout({
   return (
     <html lang="en" style={{ height: '100%' }}>
       <head>
+        <title>Client</title>
          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
         </head>
       <body className={inter.className} style={{ height: '100%', margin: 0, }}>
+      
         <UserProvider>
         <BookProvider>
+        < TransactionProvider>
+        <TopProvider>
+        <ConfigProvider>
         <Flex gap="middle" wrap="wrap" style={{ height: '100%' }}>
           <Layout className={styles.layoutStyle} style={{ height: '100%',}}>
-            <Header className={styles.headerStyle}><NavBar/></Header>
+            <Header  className={styles.headerStyle}><NavBar/></Header>
             <Content className={styles.contentStyle}> {children}</Content>
             <Footer className={styles.footerStyle}><FooterContainer/></Footer>
           </Layout>
         </Flex>
+        </ConfigProvider>
+        </TopProvider>
+        </TransactionProvider>
         </BookProvider>
         </UserProvider>
         

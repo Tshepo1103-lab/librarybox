@@ -1,7 +1,7 @@
 .main {
   height: 88vh;
   color: #000;
-  background-image: url("/assets/img/Home.JPEG");
+  background-image: url("/assets/img/Home.JPEG"); 
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -16,14 +16,15 @@
 
 .content {
   width: 450px;
+  transform: translate(20%, 120%);
   text-align: center;
-  color: rgba(199, 165, 165, 0.863);
+  color: rgb(199, 165, 165);
 }
 
 .tradingHours {
-  color: rgba(199, 165, 165, 0.863);
+  color: rgb(199, 165, 165);
   text-align: center;
-  transform: translate(0%, -10%);
+  transform: translate(20%, 30%);
   width: 460px;
   padding: 30px 30px;
   box-sizing: border-box;
@@ -32,6 +33,8 @@
   border-radius: 10%;
   margin-top: 80px;
 }
+
+
 
 .tradingHours h4 {
   margin-bottom: 30px;
@@ -43,23 +46,44 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+
 }
 
 .buttonContainer {
+  transform: translate(20%, 120%);
   text-align: left;
   width: 30%;
   display: flex;
   justify-content: space-between;
   margin-top: 80px;
+
 }
 
-.button {
+.twobutton {
   width: 200px;
   height: 50px;
   border-radius: 15px;
   background-color: #873e23;
   font-size: 20px;
+  color:#fff;
+  font-size:20px;
 }
-.button:hover {
-  background-color: #eab676;
+.twobutton:hover{
+  background-color: #eab676 !important;
+  border: 1px solid #fff !important;
+  color:#000 !important;
+
 }
+.upcoming{
+  position:absolute;
+  right:0;
+  margin-right:50px;
+  margin-top: 50px;
+  width:300px;
+  background-color: rgba(0, 0, 0, 0.2);
+ 
+}
+.upcomingTitle{
+  color: rgb(225, 211, 211);
+}
+

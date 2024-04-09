@@ -1,19 +1,20 @@
+'use client'
 import React, { useRef, useState, useEffect } from 'react';
 import { Card, Space } from 'antd';
 import { useStyles } from './styles/style';
-import { useRouter } from 'next/navigation';
 import { useBookAction, useBookState } from '../../Providers/BookProviders';
+import { IShelf } from '../../Providers/BookProviders/context';
+import Link from 'next/link';
+
 
 const Shelves: React.FC = () => {
   const { styles } = useStyles();
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
-  const router=useRouter();
 
-  const action:any=useBookAction();
-  const status:any=useBookState();
-
+  const { fetchShelf } = useBookAction();
+  const status = useBookState();
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -50,25 +51,29 @@ const Shelves: React.FC = () => {
     };
   }, [startX, scrollLeft]);
 
-  useEffect(()=>{
-    action.fetchData();
-   
-  },[])
-
+  useEffect(() => {
+    fetchShelf && fetchShelf();
+  }, []);
 
   return (
-    <div
-      className={styles.container}
-      ref={containerRef}
-    >
+    <>
+    <div className={styles.headercontainer}>
+      <br/>
+    <h2 className={styles.header}>Browse the shelves</h2>
+    </div>
+    <br/>
+    <div className={styles.container} ref={containerRef}>
       <Space className={styles.cardBox}>
-        {Object.keys(status).map((item:any, index:any) => (
-          <Card className={styles.card} key={index} onClick={()=>router.push(`/catalog/${status[item].id}`)}>
-            <h1>{status[item].name}</h1>
-          </Card>
+        {status.BookShelf?.map((item: IShelf, index: number) => (
+          <Link href={{ pathname: `/catalog/shelf/${item.id}` }} key={item.id}>
+            <Card className={styles.card}>
+              <h1>{item.name}</h1>
+            </Card>
+          </Link>
         ))}
       </Space>
     </div>
+    </>
   );
 }
 

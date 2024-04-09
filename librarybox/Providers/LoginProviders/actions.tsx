@@ -1,5 +1,4 @@
 import { createAction } from "redux-actions";
-import React from 'react';
 import { ILogin,IUser,IUserStateContext } from "./context";
 
 export enum UserActionEnum{

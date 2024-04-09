@@ -1,16 +1,18 @@
-import { handleActions } from "redux-actions";
+import {  IBookStateContext } from "./context";
 import { BookActionEnums } from "./actions";
 
-export const bookReducer= handleActions(
-    {
-        [BookActionEnums.SHELF]:(state,action)=>({
-            ...state,
-            ...action.payload
-        }),
-        [BookActionEnums.CATEGORY]:(state,action)=>({
-            ...state,
-            ...action.payload
-        })
-     
-    },{}
-)
+export function BookReducer(incomingState:IBookStateContext,action:ReduxActions.Action<IBookStateContext>):IBookStateContext{
+    const {type,payload}= action;
+    switch(type){
+        case BookActionEnums.Shelf:
+            return {...payload};
+        case BookActionEnums.Category:
+            return {...payload}
+        case BookActionEnums.Books:
+            return {...payload}
+        case BookActionEnums.Search:
+            return {...payload}
+        default:
+            return incomingState;
+    }
+}

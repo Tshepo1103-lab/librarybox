@@ -1,49 +1,89 @@
-import { useContext, useReducer } from "react"
-import { bookReducer } from "./reducer"
-import { CategoryAction, ShelfAction } from "./actions"
-import { BookActionContext, BookStateContext } from "./context"
+import { useContext, useReducer, FC, PropsWithChildren} from "react"
+import { BookReducer } from "./reducer";
+import { IBookActionStateContext, IBookStateContext, INITIAL_STATE, Ifilter } from "./context";
+import { BookRequestAction, BooksAction, CategoryAction, SearchAction} from "./actions";
+import { BookActionContext,BookContext } from "./context";
+import { instance } from "../axiosInstance";
 
 
-const BookProvider=(props:any)=>{
-    const[state,dispatch]=useReducer(bookReducer,{})
-    const getState=()=>({...state});
-    const fetchData = async ()=>{
-        try{
-            const response=await fetch("https://localhost:44311/api/services/app/Shelf/GetAll");
-            const json=await response.json();
-            // console.log(json.result.items);
-            dispatch(ShelfAction(json.result.items))
-        }
-        catch(error){
+
+//Provider that will be wrapped around the children on the layout page
+const BookProvider :FC<PropsWithChildren<{}>> = ({ children }) => {
+    const [state, dispatch] = useReducer(BookReducer, INITIAL_STATE);
+
+    //Get shelves
+    const fetchShelf = async () => {
+        try {
+            const response = await instance.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Shelf/GetAll`);
+            dispatch(BookRequestAction(response.data.result.items));
+        } catch (error) {
             console.error(error);
         }
+    };
+
+    //Get Categories
+    const fetchCategory = async (id: string) => {
+
+        try {
+            const response = await instance.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Category/GetAllIncluding?shelfId=${id}`);
+            dispatch(CategoryAction(response.data.result));
+      
+            
+        } catch (error) {
+            console.error(error);
+        }
+    };
     
+    const fetchBooks = async (id:string)=>{
+      try{
+        const response = await instance.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Book/GetAllBooksByCategory?categoryId=${id}`)
+        dispatch(BooksAction(response.data.result));
+      }catch(err){
+        console.error(err)
+      }
     }
-    const fetchCategory= async(id:string)=>{
-        try{
-            const response=await fetch(`https://localhost:44311/api/services/app/Category/GetAllIncluding?shelfId=${id}`);
-            const json=await response.json();
-            dispatch(CategoryAction(json.result))
+    const searchBooks = async (payload:Ifilter)=>{
+      await instance.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Book/GetAllBooks?filterby=${payload.filterby}&filtervalue=${payload.filtervalue}`).
+      then(response=>{
+        dispatch(SearchAction(response.data.result))
+        console.log(response.data.result)
+      }).catch(
+        response=>{
+          console.log(response)
         }
-        catch(error){
-            console.error(error);
-        }
+      )
     }
+    
     return(
-     <BookStateContext.Provider value={getState()}>
-        <BookActionContext.Provider value={{fetchData,fetchCategory}}>
-            {props.children}
+     <BookContext.Provider value={state}>
+        <BookActionContext.Provider value={{fetchShelf,fetchCategory,fetchBooks,searchBooks}}>
+            {children}
         </BookActionContext.Provider>
-     </BookStateContext.Provider>
+     </BookContext.Provider>
     )
 }
-export default BookProvider;
 
-export const useBookState=()=>{
-    const context=useContext(BookStateContext);
+export const useBookState = (): IBookStateContext => {
+    const context = useContext(BookContext);
+    if (!context) {
+      throw new Error("useLoginState must be used within a UserProvider");
+    }
     return context;
- }
- export const useBookAction=()=>{
-    const context=useContext(BookActionContext);
+  };
+  
+export const useBookAction = (): IBookActionStateContext=> {
+    const context = useContext(BookActionContext);
+    if (!context) {
+      throw new Error("useBookActions must be used within a BookProvider");
+    }
     return context;
- }
+  };
+  
+  export const useBook = (): IBookStateContext & IBookActionStateContext => {
+    return {
+      ...useBookState(),
+      ...useBookAction()
+    };
+  };
+
+  export default BookProvider
