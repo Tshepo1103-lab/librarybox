@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { useStyles } from './styles/styles';
 import { FacebookOutlined, LinkedinOutlined, InstagramOutlined } from '@ant-design/icons';
 import { usePathname } from 'next/navigation';

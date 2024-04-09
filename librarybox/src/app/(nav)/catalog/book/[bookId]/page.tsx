@@ -86,7 +86,7 @@ const Book = ({ params }: { params: { bookId: string } }) => {
                                  </Button>
                                  <div className={styles.findContainer}>
                                     <h3 className={styles.find}><EyeOutlined /> Find in Library</h3>
-                                    <p className={styles.findparagraph}> Shelf A , Physics</p>
+                                    <p className={styles.findparagraph}> Shelf B , Architecture</p>
                                 </div>
                                 <div>
                                     <h2 className={styles.detailsTitle}>More details...</h2>
@@ -105,17 +105,3 @@ const Book = ({ params }: { params: { bookId: string } }) => {
 
 export default Book;
 
-    // <Card hoverable className={styles.card}>
-                    //     <Flex justify="space-between">
-                    //     <img src={getBookInfo(params.bookId)?.url} alt="Stack of books" width={600} height={500} />
-                    //         <Flex vertical align="flex-start" justify="space-between" style={{ padding: 40 }}>
-                    //             <h1 className={styles.title}>{getBookInfo(params.bookId)?.title}</h1>
-                    //             <h5 className={styles.title}>
-                    //                 {getBookInfo(params.bookId)?.description}
-                    //             </h5>
-                    //             <Button type="primary" onClick={handleClick} className={styles.btn} >
-                    //                 Borrow
-                    //             </Button>
-                    //         </Flex>
-                    //     </Flex>
-                    // </Card>

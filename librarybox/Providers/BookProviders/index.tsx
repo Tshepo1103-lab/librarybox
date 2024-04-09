@@ -25,7 +25,7 @@ const BookProvider :FC<PropsWithChildren<{}>> = ({ children }) => {
     const fetchCategory = async (id: string) => {
 
         try {
-            const response = await instance.get(`https://localhost:44311/api/services/app/Category/GetAllIncluding?shelfId=${id}`);
+            const response = await instance.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Category/GetAllIncluding?shelfId=${id}`);
             dispatch(CategoryAction(response.data.result));
       
             
@@ -36,14 +36,14 @@ const BookProvider :FC<PropsWithChildren<{}>> = ({ children }) => {
     
     const fetchBooks = async (id:string)=>{
       try{
-        const response = await instance.get(`https://localhost:44311/api/services/app/Book/GetAllBooksByCategory?categoryId=${id}`)
+        const response = await instance.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Book/GetAllBooksByCategory?categoryId=${id}`)
         dispatch(BooksAction(response.data.result));
       }catch(err){
         console.error(err)
       }
     }
     const searchBooks = async (payload:Ifilter)=>{
-      await instance.get(`https://localhost:44311/api/services/app/Book/GetAllBooks?filterby=${payload.filterby}&filtervalue=${payload.filtervalue}`).
+      await instance.get(`${process.env.NEXT_PUBLIC_PASS}/services/app/Book/GetAllBooks?filterby=${payload.filterby}&filtervalue=${payload.filtervalue}`).
       then(response=>{
         dispatch(SearchAction(response.data.result))
         console.log(response.data.result)

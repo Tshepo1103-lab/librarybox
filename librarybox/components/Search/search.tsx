@@ -3,12 +3,11 @@ import React, { useState } from 'react';
 import { Input, Card, Form, Select, Button } from 'antd';
 import type { SearchProps } from 'antd/es/input/Search';
 import { useStyles } from './styles/styles';
-import data from './template.json';
-import Image from 'next/image';
 import { Ifilter } from '../../Providers/BookProviders/context';
-import { useBook, useBookAction, useBookState } from '../../Providers/BookProviders';
+import {  useBookAction, useBookState } from '../../Providers/BookProviders';
 import { SearchOutlined } from '@ant-design/icons';
 import Link from 'next/link';
+
 
 
 const { Meta } = Card;
@@ -38,7 +37,7 @@ const Search: React.FC<SearchProps> = ({ children }) => {
             name="filterby"
             style={{width:100,marginLeft:30}}
           >
-            <Select>
+            <Select defaultValue="title">
               <Option value={"title"}>title</Option>
               <Option value={"author"}>author</Option>
               <Option value={"isbn"}>isbn</Option>

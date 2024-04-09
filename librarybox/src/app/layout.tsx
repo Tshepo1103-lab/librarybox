@@ -24,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en" style={{ height: '100%' }}>
       <head>
+        <title>Client</title>
          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" />
         </head>
       <body className={inter.className} style={{ height: '100%', margin: 0, }}>

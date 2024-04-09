@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
-import data from './topchoice.json'
 import { Card } from 'antd';
-import Image from 'next/image';
 import { useStyles } from './styles/style';
 import { useTop, useTopState } from '../../Providers/TopChoiceProvider';
 import Link from 'next/link';
