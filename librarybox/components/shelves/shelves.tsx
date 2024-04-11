@@ -1,11 +1,12 @@
+
 'use client'
 import React, { useRef, useState, useEffect } from 'react';
 import { Card, Space } from 'antd';
+import { RightCircleOutlined } from '@ant-design/icons';
 import { useStyles } from './styles/style';
 import { useBookAction, useBookState } from '../../Providers/BookProviders';
 import { IShelf } from '../../Providers/BookProviders/context';
 import Link from 'next/link';
-
 
 const Shelves: React.FC = () => {
   const { styles } = useStyles();
@@ -15,6 +16,25 @@ const Shelves: React.FC = () => {
 
   const { fetchShelf } = useBookAction();
   const status = useBookState();
+
+  useEffect(() => {
+    fetchShelf && fetchShelf();
+  }, []);
+
+  const handleArrowClick = () => {
+    if (!containerRef.current) return;
+    const container = containerRef.current;
+    const scrollStep = 100; // You can adjust the scroll step as needed
+    const scrollWidth = container.scrollWidth;
+    const clientWidth = container.clientWidth;
+    const maxScrollLeft = scrollWidth - clientWidth;
+    let newScrollLeft = container.scrollLeft + scrollStep;
+    if (newScrollLeft > maxScrollLeft) {
+      newScrollLeft = maxScrollLeft;
+    }
+    container.scrollLeft = newScrollLeft;
+  };
+  
 
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
@@ -51,30 +71,29 @@ const Shelves: React.FC = () => {
     };
   }, [startX, scrollLeft]);
 
-  useEffect(() => {
-    fetchShelf && fetchShelf();
-  }, []);
-
   return (
     <>
-    <div className={styles.headercontainer}>
-      <br/>
-    <h2 className={styles.header}>Browse the shelves</h2>
-    </div>
-    <br/>
-    <div className={styles.container} ref={containerRef}>
-      <Space className={styles.cardBox}>
-        {status.BookShelf?.map((item: IShelf, index: number) => (
-          <Link href={{ pathname: `/catalog/shelf/${item.id}` }} key={item.id}>
-            <Card className={styles.card}>
-              <h1>{item.name}</h1>
-            </Card>
-          </Link>
-        ))}
-      </Space>
-    </div>
+      <div className={styles.headercontainer}>
+        <br />
+        <h2 className={styles.header}>Browse the shelves</h2>
+      </div>
+      <br />
+      <div className={styles.container}>
+        <Space className={styles.cardBox}>
+          {status.BookShelf?.map((item: IShelf, index: number) => (
+            <Link href={{ pathname: `/catalog/shelf/${item.id}` }} key={item.id}>
+              <Card className={styles.card}>
+                <h1>{item.name}</h1>
+              </Card>
+            </Link>
+          ))}
+        </Space>
+        <div className={styles.arrowContainer} onClick={handleArrowClick}>
+          <RightCircleOutlined className={styles.arrow} />
+        </div>
+      </div>
     </>
   );
-}
+};
 
 export default Shelves;

@@ -6,7 +6,8 @@ export enum BookActionEnums{
     Category="CATEGORY",
     Books="BOOKS",
     TopChoice="TOP",
-    Search="SEARCH"
+    Search="SEARCH",
+    FetchBook="FETCHBOOK"
 
 }
 
@@ -14,3 +15,4 @@ export const BookRequestAction = createAction<IBookStateContext, IShelf[]>(BookA
 export const CategoryAction=createAction<IBookStateContext,ICategory[]>(BookActionEnums.Category,(BookCategory)=>({BookCategory}))
 export const BooksAction=createAction<IBookStateContext,IBook[]>(BookActionEnums.Books,(CategoryBooks)=>({CategoryBooks}))
 export const SearchAction=createAction<IBookStateContext,IBook[]>(BookActionEnums.Search,(SearchBooks)=>({SearchBooks}))
+export const FetchBookAction=createAction<IBookStateContext,IBook>(BookActionEnums.FetchBook,(FetchBook)=>({FetchBook}))

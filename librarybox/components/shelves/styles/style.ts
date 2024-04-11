@@ -1,3 +1,4 @@
+
 import { createStyles, css } from "antd-style";
 
 export const useStyles = createStyles({
@@ -18,16 +19,16 @@ export const useStyles = createStyles({
     border-radius: 5px;
   }
 `,
-  header:css`
-  color:#000;
-  font-family: 'Old Standard TT', serif;
+  header: css`
+    color:#000;
+    font-family: 'Old Standard TT', serif;
   `,
   headercontainer: css`
-  margin-left:40px;
-  margin-right:40px;
-  height: 40px;
-  opacity: 1; 
-`,
+    margin-left:40px;
+    margin-right:40px;
+    height: 40px;
+    opacity: 1; 
+  `,
   cardBox: css`
     padding: 30px;
     display: inline-flex;
@@ -40,7 +41,7 @@ export const useStyles = createStyles({
     border-radius: 20px;
     color:#000;
     border:1px solid #fff;
-    cursor: pointer;
+    cursor: grab;
     box-shadow: 5px 15px 5px 2px rgba(0, 0, 0, 0.09);
     transition: background 0.3s ease-in-out, transform 0.9s ease-in-out, opacity 0.9s ease-in-out;
     overflow: hidden;
@@ -55,5 +56,15 @@ export const useStyles = createStyles({
       border:2px solid #fff;
       transform: scale(1.1); /* Zoom in */
     }
+  `,
+  arrow: css`
+    color:#000;
+  `,
+  arrowContainer: css`
+    left: 20px;
+    bottom:20px; 
+    transform: translateY(-50%);
+    cursor: pointer;
+    z-index: 10;
   `,
 });

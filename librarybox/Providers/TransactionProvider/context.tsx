@@ -10,6 +10,7 @@ export interface ITransaction{
     UserId?:string;
     book?:IBook;
     user?:IUser;
+    
     status:number;
 }
 
@@ -24,7 +25,7 @@ export interface ITransactionStateContext{
 
 export interface ITransactionActionContext{
     createtransaction?:(payload:ITransaction) => void;
-    fetchtransaction?:(payload:string) =>void;
+    fetchtransaction?:(payload:number) =>void;
     
 }
 

@@ -114,6 +114,22 @@ export const useStyles = createStyles({
         border: 1px solid #fff;
         color: #000;  
     }
-`
+    `, input: css`
+    height: 40px;
+    width:200px;
+    background-color: transparent;
+    border-radius: 3px;
+    border:2px solid #873e23;
+    padding: 0 10px;
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 300;
+    ::placeholder {
+    color: #000; 
+    }
+    &:hover{
+        border:2px solid #fff; 
+    }
+    `,
 
 });

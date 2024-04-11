@@ -15,16 +15,16 @@ const TransactionProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
                 message.success("Transaction successfully created");
                 dispatch(createTransactionRequestAction(response.data.result));
             } else {
-                message.error("Failed ");
+                message.error("Failed to transact the book");
             }
-
             
         } catch (error:any) {
             message.error(error.response.data.error.message)
+            
            
         }
     };
-    const fetchtransaction = async (id:string) =>{
+    const fetchtransaction = async (id:number) =>{
         try{
             const response = await instance.get(`https://localhost:44311/api/services/app/Transaction/GetAllIncluding?userId=${id}`)
             if (response.data.success) {
@@ -35,7 +35,7 @@ const TransactionProvider: FC<PropsWithChildren<{}>> = ({ children }) => {
             }
         }
         catch(error:any){
-            message.error(error.data.error.message)
+            message.error(error.response.data.error.message)
         }
     }
 

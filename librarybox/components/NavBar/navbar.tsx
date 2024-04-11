@@ -44,7 +44,7 @@ const NavBar = () => {
       const dataConfig: IConfig[] = ans ? JSON.parse(ans) : [];
 
     }
-  },[state])
+  },[states])
   
   
   useEffect(() => {
@@ -53,13 +53,13 @@ const NavBar = () => {
         setUserId(user.id); // Set the userId state when user details are fetched
       }
     });
-  }, []);
+  }, [states]);
   
   useEffect(() => {
     if (fetchtransaction && userId) { // Ensure userId is not null
-      fetchtransaction(userId); // Call fetchtransaction with userId
+      fetchtransaction(Number(userId)); // Call fetchtransaction with userId
     }
-  }, [userId]);
+  }, [state]);
 
   const data=status.FetchTransaction && status.FetchTransaction[status.FetchTransaction.length-1] && status.FetchTransaction[status.FetchTransaction.length-1].book?.url;
   

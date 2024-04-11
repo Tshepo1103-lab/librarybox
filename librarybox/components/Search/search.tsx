@@ -62,7 +62,7 @@ const Search: React.FC<SearchProps> = ({ children }) => {
           {state.SearchBooks&&state.SearchBooks? (
             <div className={styles.data}>
               {state.SearchBooks&&state.SearchBooks?.map((item,index) => (
-                  <Link href={{ pathname: `/catalog/book/${index}` }} key={item.id}>
+                  <Link href={{ pathname: `/catalog/book/${item.id}` }} key={item.id}>
                     <Card key={item.id} className={styles.searchCard} cover={<img src={item.url} alt="Stack of books" width={200} height={250} />}>
                       <div>
                         <h3 className={styles.title}>{item.title}</h3>

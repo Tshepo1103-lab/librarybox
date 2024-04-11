@@ -25,7 +25,7 @@ const TopChoice = () => {
             <br />
             <div className={styles.cardBox}>
                 {status.FetchTopchoice?.map((item,index) => (
-                    <Link  href={{ pathname: `/catalog/book/${index}` }}  key={item.id}>
+                    <Link  href={{ pathname: `/catalog/book/${item.id}` }}  key={item.id}>
                       <Card
                        
                         className={`${styles.searchCard} top-choice-card`}

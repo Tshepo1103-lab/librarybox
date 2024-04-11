@@ -32,6 +32,7 @@ export interface IBookStateContext{
     readonly BookCategory?:ICategory[];
     readonly CategoryBooks?:IBook[];
     readonly SearchBooks?:IBook[];
+    readonly FetchBook?:IBook;
    
 }
 
@@ -40,6 +41,7 @@ export interface IBookActionStateContext{
     fetchCategory?:(payload:string)=>void;
     fetchBooks?:(payload:string)=>void;
     searchBooks?:(payload:Ifilter)=>void;
+    fetchBook?:(payload:string)=>void;
    
 }
 
